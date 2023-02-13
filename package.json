@@ -1,0 +1,21 @@
+{
+    "name": "renverso",
+    "source": "src/index.pug",
+    "browserslist": "> 0.5%, last 2 versions, not dead",
+    "type": "module",
+    "scripts": {
+        "start": "parcel",
+        "test": "eslint test/**/*.js && mocha ./test/**/*.js",
+        "build": "eslint src/**/*.js && parcel build"
+    },
+    "devDependencies": {
+        "@parcel/transformer-pug": "^2.8.3",
+        "@parcel/transformer-sass": "^2.8.3",
+        "chai": "^4.3.7",
+        "eslint": "^8.34.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.27.5",
+        "mocha": "^10.2.0",
+        "parcel": "^2.8.3"
+    }
+}
