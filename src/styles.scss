@@ -1,0 +1,28 @@
+@import 'consts.scss';
+
+html {
+    // make root font size 100%
+    font-size: 100%;
+}
+
+// reset defaults
+body, div {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+    background-color: $base-black;
+}
+
+@import 'ui/utils/menu/main.scss';
+@import 'ui/utils/menu-item/main.scss';
+@import 'ui/utils/menu-title/main.scss';
+@import 'ui/utils/menu-item-text/main.scss';

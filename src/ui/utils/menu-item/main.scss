@@ -1,0 +1,19 @@
+@import '../../../consts.scss';
+
+@mixin menu-base-style {
+    @include default-color;
+    width: 60vw;
+    margin: 1vh 3vw 3vh 1vw;
+}
+
+.ui-menu-item {
+    @include menu-base-style;
+    @include default-border;
+
+    background-color: $base-gray;
+
+    &:hover { 
+        background-color: $base-black;
+    }
+}
+
