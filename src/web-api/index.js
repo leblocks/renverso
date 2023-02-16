@@ -1,3 +1,4 @@
+// TODO add jsdoc with correct types
 export const createElement = (elementName) => document.createElement(elementName);
 export const querySelector = (query) => document.querySelector(query);
 export const querySelectorAll = (query) => document.querySelectorAll(query);
