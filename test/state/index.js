@@ -1,11 +1,11 @@
-import { expect } from 'chai';
-
 import {
     it,
     describe,
     afterEach,
     beforeEach,
 } from 'mocha';
+
+import { expect } from 'chai';
 
 import {
     resetState,
