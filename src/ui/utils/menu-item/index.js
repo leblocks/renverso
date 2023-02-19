@@ -1,4 +1,4 @@
-import { createElement, getClassList } from '../../../web-api';
+import { createElement, getClassList } from '../../../web-api/index.js';
 
 /**
  * Creates menu-item element on top of button HTML element.

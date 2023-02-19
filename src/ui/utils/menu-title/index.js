@@ -1,4 +1,4 @@
-import { createElement, getClassList } from '../../../web-api';
+import { createElement, getClassList } from '../../../web-api/index.js';
 /**
  * Creates disabled html button element that serves as menu title.
  * @param {string} title Title to show.
