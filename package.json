@@ -4,7 +4,7 @@
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "type": "module",
     "scripts": {
-        "start": "parcel",
+        "start": "parcel --no-cache",
         "test": "eslint test/**/*.js && mocha --recursive",
         "build": "eslint src/**/*.js && parcel build"
     },
