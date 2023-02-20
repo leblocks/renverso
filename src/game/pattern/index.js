@@ -20,8 +20,10 @@ export const wholeCrossPatternProvider = (width, height) => (x, y) => {
         cellsToFlip.push([i, x]);
     }
 
-    for (let i = 0; i < width && i !== x; i += 1) {
-        cellsToFlip.push([y, i]);
+    for (let i = 0; i < width; i += 1) {
+        if (i !== x) { // avoid cell duplicate
+            cellsToFlip.push([y, i]);
+        }
     }
     return cellsToFlip;
 };
@@ -34,9 +36,11 @@ export const wholeCrossPatternProvider = (width, height) => (x, y) => {
  * @returns {PatternCallback} Small cross pattern method.
  */
 export const smallCrossPatternProvider = (width, height) => (x, y) => {
-    const offsets = [[0, 0], [-1, 0], [-1, -1], [1, 0], [1, 1]];
+    const offsets = [[0, 0], [-1, 0], [1, 0], [0, -1], [0, 1]];
 
     return offsets
+        // filter out of bound coords
         .filter((coord) => ((coord[0] + y) < height) && ((coord[1] + x) < width))
+        .filter((coord) => ((coord[0] + y) >= 0) && ((coord[1] + x) >= 0))
         .map((coord) => [coord[0] + y, coord[1] + x]);
 };
