@@ -1,9 +1,18 @@
 // TODO this code is copied from other project, check if some methods still relevant
-
 import { LOCATION_MAIN_MENU } from './consts.js';
 
 const defaultState = {
     location: LOCATION_MAIN_MENU,
+
+    // TODO this is a debug case
+    board: [
+        [false, false, false],
+        [false, false, false],
+        [false, false, false],
+    ],
+    moves: [],
+    solution: [],
+    pattern: () => [],
 };
 
 // state instance

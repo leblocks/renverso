@@ -48,4 +48,21 @@ describe('router tests', () => {
 
         expect(querySelector('div > div > a').innerHTML).to.equal('dummy2');
     });
+
+    it('router correctly renders lazy component', () => {
+        const element1 = createElement('div');
+        element1.innerHTML = '<a>dummy1</a>';
+
+        const element2 = createElement('div');
+        element2.innerHTML = '<a>dummy2</a>';
+
+        router('DUMMY_STATE_1', {
+            DUMMY_STATE_1: element1,
+            DUMMY_STATE_2: () => element2,
+        });
+
+        setState({ location: 'DUMMY_STATE_2' });
+
+        expect(querySelector('div > div > a').innerHTML).to.equal('dummy2');
+    });
 });

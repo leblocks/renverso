@@ -21,7 +21,10 @@ export default function router(initialLocation, initialMap) {
         if (location !== locationComponentMap.currentLocation) {
             const mainContainer = querySelector('#root');
             mainContainer.innerHTML = '';
-            mainContainer.appendChild(locationComponentMap.map[location]);
+            let component = locationComponentMap.map[location];
+            // if user provided lazy component, evaluate it
+            component = typeof component === 'function' ? component() : component;
+            mainContainer.appendChild(component);
             locationComponentMap.currentLocation = location;
         }
     };

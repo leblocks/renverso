@@ -6,7 +6,7 @@ import {
     LOCATION_COLOR_SETTINGS,
 } from '../../state/consts.js';
 
-export default function createMainMenu() {
+export default function mainMenu() {
     const mainMenu = menu();
     mainMenu.appendChild(menuTitle('Renverso'));
     mainMenu.appendChild(menuItem('New game', () => goto(LOCATION_LEVEL_SELECTION_MENU)));
