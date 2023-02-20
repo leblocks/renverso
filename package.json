@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "start": "parcel --no-cache",
-        "test": "eslint test/**/*.js && mocha --recursive",
+        "test": "eslint test/** && mocha --recursive",
         "build": "eslint src/**/*.js && parcel build"
     },
     "devDependencies": {
