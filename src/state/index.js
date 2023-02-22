@@ -1,18 +1,24 @@
 // TODO this code is copied from other project, check if some methods still relevant
 import { LOCATION_MAIN_MENU } from './consts.js';
 
+import { smallCrossPatternProvider } from '../game/index.js';
+
 const defaultState = {
     location: LOCATION_MAIN_MENU,
 
-    // TODO this is a debug case
+    // TODO debug data
     board: [
-        [false, false, false],
-        [false, false, false],
-        [false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false],
     ],
     moves: [],
     solution: [],
-    pattern: () => [],
+
+    // TODO debug data
+    pattern: smallCrossPatternProvider,
 };
 
 // state instance
