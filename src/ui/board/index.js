@@ -26,7 +26,6 @@ const setCellDimensions = (cell, { width, height, margin }) => {
     cell.style.setProperty('margin', margin);
 };
 
-// TODO consider testing it
 const calculateCellDimensions = (board) => {
     const rowCount = board.length;
     const units = window.innerWidth < window.innerHeight ? 'vw' : 'vh';
@@ -37,14 +36,14 @@ const calculateCellDimensions = (board) => {
     return { margin, width: cellSize + units, height: cellSize + units, };
 };
 
-// TODO implement + tests
+// TODO tests
 /**
  * @param {Event} e On click event.
  */
-const onCellClick = (e) => {
+const onCellClick = ({ target }) => {
     const { board, pattern } = getState();
-    const row = parseInt(getAttribute(e.target, ROW_INDEX));
-    const col = parseInt(getAttribute(e.target, COLUMN_INDEX));
+    const row = parseInt(getAttribute(target, ROW_INDEX));
+    const col = parseInt(getAttribute(target, COLUMN_INDEX));
 
     for (let coords of pattern(row, col)) {
         board[coords[0]][coords[1]] = !board[coords[0]][coords[1]];
@@ -66,7 +65,7 @@ export const initBoard = () => {
         const row = createElement('div');
         getClassList(row).add('row');
 
-        // build cells
+        // build cells in the row
         for (let c = 0; c < board[r].length; c += 1) {
             const cell = createElement('div');
             getClassList(cell).add('cell');
@@ -76,10 +75,8 @@ export const initBoard = () => {
             setCellDimensions(cell, calculateCellDimensions(board));
 
             addStateObserver(['board'], ({ board }) => {
-                // TODO capture here r and c instead of getting those from attribute
-                const row = parseInt(getAttribute(cell, ROW_INDEX));
-                const col = parseInt(getAttribute(cell, COLUMN_INDEX));
-                const color = board[row][col] ? 'black' : 'white';
+                // TODO use color theme here
+                const color = board[r][c] ? 'black' : 'white';
                 cell.style.setProperty('background-color', color);
             });
 
