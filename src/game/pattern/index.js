@@ -13,17 +13,17 @@
  * @param {number} columns Number of columns in game board.
  * @returns {PatternCallback} Whole cross pattern method.
  */
-export const wholeCrossPatternProvider = (rows, columns) => (r, c) => {
-    // TODO fix!
+export const wholeCrossPatternProvider = (rows, columns) => (row, col) => {
     const cellsToFlip = [];
 
-    for (let i = 0; i < columns; i += 1) {
-        cellsToFlip.push([i, r]);
+    for (let i = 0; i < rows; i += 1) {
+        cellsToFlip.push([i, col]);
     }
 
-    for (let i = 0; i < rows; i += 1) {
-        if (i !== r) { // avoid cell duplicate
-            cellsToFlip.push([c, i]);
+    for (let i = 0; i < columns; i += 1) {
+        // do not insert original cell twice
+        if (!cellsToFlip.some(([r, c]) => r === row && c === i )) {
+            cellsToFlip.push([row, i]);
         }
     }
     return cellsToFlip;
@@ -36,13 +36,11 @@ export const wholeCrossPatternProvider = (rows, columns) => (r, c) => {
  * @param {number} columns Number of columns in game board.
  * @returns {PatternCallback} Small cross pattern method.
  */
-export const smallCrossPatternProvider = (rows, columns) => (r, c) => {
-    // TODO fix!
+export const smallCrossPatternProvider = (rows, columns) => (row, col) => {
     const offsets = [[0, 0], [-1, 0], [1, 0], [0, -1], [0, 1]];
-
     return offsets
         // filter out of bound coords
-        .filter((coord) => ((coord[0] + c) < columns) && ((coord[1] + r) < rows))
-        .filter((coord) => ((coord[0] + c) >= 0) && ((coord[1] + r) >= 0))
-        .map((coord) => [coord[0] + c, coord[1] + r]);
+        .filter((coord) => ((coord[0] + row) < rows) && ((coord[1] + col) < columns))
+        .filter((coord) => ((coord[0] + row) >= 0) && ((coord[1] + col) >= 0))
+        .map((coord) => [coord[0] + row, coord[1] + col]);
 };
