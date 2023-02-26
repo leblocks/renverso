@@ -30,10 +30,11 @@ const calculateCellDimensions = (board) => {
     const rowCount = board.length;
     const units = window.innerWidth < window.innerHeight ? 'vw' : 'vh';
     // assuming for now that rowCount === columnCount always
-    const cellSize = Math.floor((100 - 2 * BOARD_PADDING - (rowCount - 1) * CELL_TO_MARGIN_RATIO * 2) / rowCount);
+    const boardSize = (100 - 2 * BOARD_PADDING - (rowCount - 1) * CELL_TO_MARGIN_RATIO * 2);
+    const cellSize = Math.floor(boardSize / rowCount);
     const margin = cellSize * CELL_TO_MARGIN_RATIO + units;
 
-    return { margin, width: cellSize + units, height: cellSize + units, };
+    return { margin, width: cellSize + units, height: cellSize + units };
 };
 
 /**
@@ -41,14 +42,15 @@ const calculateCellDimensions = (board) => {
  */
 const onCellClick = ({ target }) => {
     const { board, pattern } = getState();
-    const row = parseInt(getAttribute(target, ROW_INDEX_ATTRIBUTE));
-    const col = parseInt(getAttribute(target, COLUMN_INDEX_ATTRIBUTE));
+    const row = parseInt(getAttribute(target, ROW_INDEX_ATTRIBUTE), 10);
+    const col = parseInt(getAttribute(target, COLUMN_INDEX_ATTRIBUTE), 10);
 
-    for (let coords of pattern(row, col)) {
-        board[coords[0]][coords[1]] = !board[coords[0]][coords[1]];
-    }
+    pattern(row, col) // flip cells calculated by pattern
+        .forEach(([r, c]) => {
+            board[r][c] = !board[r][c];
+        });
 
-    setState({ board, });
+    setState({ board });
 };
 
 /**
@@ -73,9 +75,9 @@ export const initBoard = () => {
             addEventListener(cell, 'click', onCellClick);
             setCellDimensions(cell, calculateCellDimensions(board));
 
-            addStateObserver(['board'], ({ board }) => {
+            addStateObserver(['board'], (state) => {
                 // TODO use color theme here and check it in tests
-                const color = board[r][c] ? 'black' : 'white';
+                const color = state.board[r][c] ? 'black' : 'white';
                 cell.style.setProperty('background-color', color);
             });
             row.appendChild(cell);

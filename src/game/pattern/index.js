@@ -22,7 +22,7 @@ export const wholeCrossPatternProvider = (rows, columns) => (row, col) => {
 
     for (let i = 0; i < columns; i += 1) {
         // do not insert original cell twice
-        if (!cellsToFlip.some(([r, c]) => r === row && c === i )) {
+        if (!cellsToFlip.some(([r, c]) => r === row && c === i)) {
             cellsToFlip.push([row, i]);
         }
     }
