@@ -8,5 +8,5 @@ logic game
 * write this readme
 * provide good html template with pug
 * scan for TODOs during production build
+* theme coloring fix
 * disable parcel cache?
-* fix patterns

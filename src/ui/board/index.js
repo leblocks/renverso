@@ -14,8 +14,8 @@ import {
 } from '../../state/index.js';
 
 import {
-    ROW_INDEX,
-    COLUMN_INDEX,
+    ROW_INDEX_ATTRIBUTE,
+    COLUMN_INDEX_ATTRIBUTE,
     BOARD_PADDING,
     CELL_TO_MARGIN_RATIO,
 } from '../../consts.js';
@@ -36,14 +36,13 @@ const calculateCellDimensions = (board) => {
     return { margin, width: cellSize + units, height: cellSize + units, };
 };
 
-// TODO tests
 /**
- * @param {Event} e On click event.
+ * @param {Event} e Cell onclick event handler.
  */
 const onCellClick = ({ target }) => {
     const { board, pattern } = getState();
-    const row = parseInt(getAttribute(target, ROW_INDEX));
-    const col = parseInt(getAttribute(target, COLUMN_INDEX));
+    const row = parseInt(getAttribute(target, ROW_INDEX_ATTRIBUTE));
+    const col = parseInt(getAttribute(target, COLUMN_INDEX_ATTRIBUTE));
 
     for (let coords of pattern(row, col)) {
         board[coords[0]][coords[1]] = !board[coords[0]][coords[1]];
@@ -69,17 +68,16 @@ export const initBoard = () => {
         for (let c = 0; c < board[r].length; c += 1) {
             const cell = createElement('div');
             getClassList(cell).add('cell');
-            setAttribute(cell, ROW_INDEX, r);
-            setAttribute(cell, COLUMN_INDEX, c);
+            setAttribute(cell, ROW_INDEX_ATTRIBUTE, r);
+            setAttribute(cell, COLUMN_INDEX_ATTRIBUTE, c);
             addEventListener(cell, 'click', onCellClick);
             setCellDimensions(cell, calculateCellDimensions(board));
 
             addStateObserver(['board'], ({ board }) => {
-                // TODO use color theme here
+                // TODO use color theme here and check it in tests
                 const color = board[r][c] ? 'black' : 'white';
                 cell.style.setProperty('background-color', color);
             });
-
             row.appendChild(cell);
         }
         container.appendChild(row);
