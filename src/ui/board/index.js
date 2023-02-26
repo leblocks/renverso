@@ -1,5 +1,6 @@
 import {
     getClassList,
+    getAttribute,
     setAttribute,
     createElement,
     querySelectorAll,
@@ -8,9 +9,13 @@ import {
 
 import {
     getState,
+    setState,
+    addStateObserver,
 } from '../../state/index.js';
 
 import {
+    ROW_INDEX,
+    COLUMN_INDEX,
     BOARD_PADDING,
     CELL_TO_MARGIN_RATIO,
 } from '../../consts.js';
@@ -29,15 +34,24 @@ const calculateCellDimensions = (board) => {
     const cellSize = Math.floor((100 - 2 * BOARD_PADDING - (rowCount - 1) * CELL_TO_MARGIN_RATIO * 2) / rowCount);
     const margin = cellSize * CELL_TO_MARGIN_RATIO + units;
 
-    return {
-        margin,
-        width: cellSize + units,
-        height: cellSize + units,
-    };
+    return { margin, width: cellSize + units, height: cellSize + units, };
 };
 
 // TODO implement + tests
-const onCellClick = (e) => console.log(e);
+/**
+ * @param {Event} e On click event.
+ */
+const onCellClick = (e) => {
+    const { board, pattern } = getState();
+    const row = parseInt(getAttribute(e.target, ROW_INDEX));
+    const col = parseInt(getAttribute(e.target, COLUMN_INDEX));
+
+    for (let coords of pattern(row, col)) {
+        board[coords[0]][coords[1]] = !board[coords[0]][coords[1]];
+    }
+
+    setState({ board, });
+};
 
 /**
  * Creates new board component, according to a current state.
@@ -55,11 +69,20 @@ export const initBoard = () => {
         // build cells
         for (let c = 0; c < board[r].length; c += 1) {
             const cell = createElement('div');
-            setAttribute(cell, 'row_index', r);
-            setAttribute(cell, 'column_index', c);
+            getClassList(cell).add('cell');
+            setAttribute(cell, ROW_INDEX, r);
+            setAttribute(cell, COLUMN_INDEX, c);
             addEventListener(cell, 'click', onCellClick);
             setCellDimensions(cell, calculateCellDimensions(board));
-            getClassList(cell).add('cell');
+
+            addStateObserver(['board'], ({ board }) => {
+                // TODO capture here r and c instead of getting those from attribute
+                const row = parseInt(getAttribute(cell, ROW_INDEX));
+                const col = parseInt(getAttribute(cell, COLUMN_INDEX));
+                const color = board[row][col] ? 'black' : 'white';
+                cell.style.setProperty('background-color', color);
+            });
+
             row.appendChild(cell);
         }
         container.appendChild(row);

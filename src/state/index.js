@@ -18,7 +18,7 @@ const defaultState = {
     solution: [],
 
     // TODO debug data
-    pattern: smallCrossPatternProvider,
+    pattern: smallCrossPatternProvider(5, 5),
 };
 
 // state instance

@@ -24,6 +24,14 @@ export const getClassList = (htmlElement) => htmlElement.classList;
 export const setAttribute = (element, name, value) => element.setAttribute(name, value);
 
 /**
+ * Wrapper for https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute
+ * @param {Element} element Element to set attribute on it
+ * @param {string} name Attribute name.
+ * @return {string} Attribute value.
+ */
+export const getAttribute = (element, name) => element.getAttribute(name);
+
+/**
  * Wrapper for https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener.
  * @param {Element} el Element to set event listener on it.
  * @param {string} event Event name.
