@@ -1,11 +1,12 @@
 // TODO this code is copied from other project, check if some methods still relevant
 import { LOCATION_MAIN_MENU } from './consts.js';
 
+import { COLOR_SCHEME_LIGHT } from '../consts.js';
+
 import { wholeCrossPatternProvider } from '../game/index.js';
 
 const defaultState = {
     location: LOCATION_MAIN_MENU,
-
     // TODO debug data
     board: [
         [false, false, false, false, false],
@@ -16,9 +17,9 @@ const defaultState = {
     ],
     moves: [],
     solution: [],
-
     // TODO debug data
     pattern: wholeCrossPatternProvider(5, 5),
+    colorScheme: COLOR_SCHEME_LIGHT.id,
 };
 
 // state instance
