@@ -7,7 +7,6 @@ logic game
 ## TODOs
 * write this readme
 * provide good html template with pug
-* use jsdom and pug in tests
 * scan for TODOs during production build
-* cover with tests router
 * disable parcel cache?
+* fix patterns
