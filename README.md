@@ -10,3 +10,4 @@ logic game
 * scan for TODOs during production build
 * theme coloring fix
 * disable parcel cache?
+* make sure that dist folder is being cleaned every time by parcel
