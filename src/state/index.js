@@ -19,7 +19,7 @@ const defaultState = {
     solution: [],
     // TODO debug data
     pattern: wholeCrossPatternProvider(5, 5),
-    colorScheme: COLOR_SCHEME_LIGHT.id,
+    colorTheme: COLOR_SCHEME_LIGHT.id,
 };
 
 // state instance
