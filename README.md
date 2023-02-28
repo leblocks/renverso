@@ -10,5 +10,6 @@ logic game
 * scan for TODOs during production build
 * adjust .gitignore, remove unnecessary entries
 * theme coloring fix
+* create back buttons and status menu on board
 * disable parcel cache?
 * make sure that dist folder is being cleaned every time by parcel

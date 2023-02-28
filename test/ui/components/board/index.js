@@ -12,13 +12,13 @@ import { expect } from 'chai';
 import {
     ROW_INDEX_ATTRIBUTE,
     COLUMN_INDEX_ATTRIBUTE,
-} from '../../../src/consts.js';
+} from '../../../../src/consts.js';
 
-import { router } from '../../../src/ui/index.js';
-import { getState, setState } from '../../../src/state/index.js';
-import { initBoard } from '../../../src/ui/board/index.js';
-import { querySelector } from '../../../src/web-api/index.js';
-import { wholeCrossPatternProvider } from '../../../src/game/index.js';
+import { router } from '../../../../src/ui/index.js';
+import { getState, setState } from '../../../../src/state/index.js';
+import { initBoard } from '../../../../src/ui/components/board/index.js';
+import { querySelector } from '../../../../src/web-api/index.js';
+import { wholeCrossPatternProvider } from '../../../../src/game/index.js';
 
 describe('board tests', () => {
     // setup jsdom

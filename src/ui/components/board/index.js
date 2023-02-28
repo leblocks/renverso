@@ -6,22 +6,22 @@ import {
     setCSSProperty,
     querySelectorAll,
     addEventListener,
-} from '../../web-api/index.js';
+} from '../../../web-api/index.js';
 
 import {
     getState,
     setState,
     addStateObserver,
-} from '../../state/index.js';
+} from '../../../state/index.js';
 
-import { getCellColor, getColorThemeById } from '../utils/index.js';
+import { getCellColor, getColorThemeById } from '../../utils/index.js';
 
 import {
     ROW_INDEX_ATTRIBUTE,
     COLUMN_INDEX_ATTRIBUTE,
     BOARD_PADDING,
     CELL_TO_MARGIN_RATIO,
-} from '../../consts.js';
+} from '../../../consts.js';
 
 const setCellDimensions = (cell, { width, height, margin }) => {
     setCSSProperty(cell, 'width', width);
