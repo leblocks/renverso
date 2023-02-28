@@ -3,6 +3,7 @@ import {
     getAttribute,
     setAttribute,
     createElement,
+    setCSSProperty,
     querySelectorAll,
     addEventListener,
 } from '../../web-api/index.js';
@@ -13,6 +14,8 @@ import {
     addStateObserver,
 } from '../../state/index.js';
 
+import { getCellColor, getColorThemeById } from '../utils/index.js';
+
 import {
     ROW_INDEX_ATTRIBUTE,
     COLUMN_INDEX_ATTRIBUTE,
@@ -21,9 +24,9 @@ import {
 } from '../../consts.js';
 
 const setCellDimensions = (cell, { width, height, margin }) => {
-    cell.style.setProperty('width', width);
-    cell.style.setProperty('height', height);
-    cell.style.setProperty('margin', margin);
+    setCSSProperty(cell, 'width', width);
+    setCSSProperty(cell, 'height', height);
+    setCSSProperty(cell, 'margin', margin);
 };
 
 const calculateCellDimensions = (board) => {
@@ -60,6 +63,11 @@ export const initBoard = () => {
     const container = createElement('div');
     getClassList(container).add('board');
 
+    addStateObserver(['colorTheme'], ({ colorTheme }) => {
+        const theme = getColorThemeById(colorTheme);
+        setCSSProperty(container, 'background-color', theme.board);
+    });
+
     const { board } = getState();
     // build row
     for (let r = 0; r < board.length; r += 1) {
@@ -76,10 +84,11 @@ export const initBoard = () => {
             setCellDimensions(cell, calculateCellDimensions(board));
 
             addStateObserver(['board'], (state) => {
-                // TODO use color theme here and check it in tests
-                const color = state.board[r][c] ? 'black' : 'white';
-                cell.style.setProperty('background-color', color);
+                // update cell colors whenever flip occurs
+                setCSSProperty(cell, 'background-color', getCellColor(state.board[r][c],
+                    getColorThemeById(state.colorTheme)));
             });
+
             row.appendChild(cell);
         }
         container.appendChild(row);

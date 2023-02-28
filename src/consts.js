@@ -17,9 +17,9 @@ export const COLOR_SCHEME_LIGHT = {
 // TODO colors
 export const COLOR_SCHEME_DARK = {
     id: 2,
-    cell: 'white',
+    cell: 'yellow',
     flippedCell: 'gray',
-    board: 'bluew',
+    board: 'blue',
 };
 
 // TODO colors

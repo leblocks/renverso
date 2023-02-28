@@ -19,6 +19,7 @@ const defaultState = {
     solution: [],
     // TODO debug data
     pattern: wholeCrossPatternProvider(5, 5),
+    // TODO rename to color theme id
     colorTheme: COLOR_SCHEME_LIGHT.id,
 };
 
