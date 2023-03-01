@@ -14,12 +14,17 @@ import {
     addStateObserver,
 } from '../../../state/index.js';
 
-import { getCellColor, getColorThemeById } from '../../utils/index.js';
+import { 
+    getCellColor,
+    getBoardColor,
+    getColorThemeById,
+} from '../../utils/index.js';
 
 import {
     ROW_INDEX_ATTRIBUTE,
     COLUMN_INDEX_ATTRIBUTE,
     BOARD_PADDING,
+    BASE_BOARD_SIZE,
     CELL_TO_MARGIN_RATIO,
 } from '../../../consts.js';
 
@@ -33,10 +38,9 @@ const calculateCellDimensions = (board) => {
     const rowCount = board.length;
     const units = window.innerWidth < window.innerHeight ? 'vw' : 'vh';
     // assuming for now that rowCount === columnCount always
-    const boardSize = (100 - 2 * BOARD_PADDING - (rowCount - 1) * CELL_TO_MARGIN_RATIO * 2);
-    const cellSize = Math.floor(boardSize / rowCount);
+    const boardSize = (BASE_BOARD_SIZE - (2 * BOARD_PADDING));
+    const cellSize = Math.floor((1 - CELL_TO_MARGIN_RATIO) * (boardSize / rowCount));
     const margin = cellSize * CELL_TO_MARGIN_RATIO + units;
-
     return { margin, width: cellSize + units, height: cellSize + units };
 };
 
@@ -56,17 +60,27 @@ const onCellClick = ({ target }) => {
     setState({ board });
 };
 
+const setBoardColor = (container, colorTheme) => {
+    const theme = getColorThemeById(colorTheme);
+    setCSSProperty(container, 'background-color', getBoardColor(theme));
+};
+
+const setCellColor = (cell, state, r, c) => {
+    setCSSProperty(cell, 'background-color', 
+        getCellColor(state.board[r][c], getColorThemeById(state.colorTheme)));
+};
+
 /**
  * Creates new board component, according to a current state.
  */
 export const initBoard = () => {
+    const st = getState();
     const container = createElement('div');
     getClassList(container).add('board');
-
-    addStateObserver(['colorTheme'], ({ colorTheme }) => {
-        const theme = getColorThemeById(colorTheme);
-        setCSSProperty(container, 'background-color', theme.board);
-    });
+    // set initial color
+    setBoardColor(container, st.colorTheme);
+    // observer color theme changes
+    addStateObserver(['colorTheme'], ({ colorTheme }) => setBoardColor(colorTheme));
 
     const { board } = getState();
     // build row
@@ -82,12 +96,10 @@ export const initBoard = () => {
             setAttribute(cell, COLUMN_INDEX_ATTRIBUTE, c);
             addEventListener(cell, 'click', onCellClick);
             setCellDimensions(cell, calculateCellDimensions(board));
-
-            addStateObserver(['board'], (state) => {
-                // update cell colors whenever flip occurs
-                setCSSProperty(cell, 'background-color', getCellColor(state.board[r][c],
-                    getColorThemeById(state.colorTheme)));
-            });
+            // set initial color
+            setCellColor(cell, st, r, c);
+            // observer color theme changes
+            addStateObserver(['board'], (state) => setCellColor(cell, state, r, c));
 
             row.appendChild(cell);
         }

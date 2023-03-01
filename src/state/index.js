@@ -9,16 +9,15 @@ const defaultState = {
     location: LOCATION_MAIN_MENU,
     // TODO debug data
     board: [
-        [false, false, false, false, false],
-        [false, false, false, false, false],
-        [false, false, false, false, false],
-        [false, false, false, false, false],
-        [false, false, false, false, false],
+        [false, false, false, false],
+        [false, false, false, false],
+        [false, false, false, false],
+        [false, false, false, false],
     ],
     moves: [],
     solution: [],
     // TODO debug data
-    pattern: wholeCrossPatternProvider(5, 5),
+    pattern: wholeCrossPatternProvider(4, 4),
     // TODO rename to color theme id
     colorTheme: COLOR_SCHEME_LIGHT.id,
 };

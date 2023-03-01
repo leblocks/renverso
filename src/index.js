@@ -1,8 +1,9 @@
 import {
     router,
+    puzzle,
     mainMenu,
-    initBoard,
     resizeBoard,
+    resizeStatusLine,
     levelSelectionMenu,
     colorSelectionMenu,
 } from './ui';
@@ -16,6 +17,7 @@ import {
 
 window.onresize = () => {
     resizeBoard();
+    resizeStatusLine();
 };
 
 window.onload = () => {
@@ -23,6 +25,6 @@ window.onload = () => {
         [LOCATION_MAIN_MENU]: mainMenu(),
         [LOCATION_LEVEL_SELECTION_MENU]: levelSelectionMenu(),
         [LOCATION_COLOR_SETTINGS]: colorSelectionMenu(),
-        [LOCATION_GAME]: () => initBoard(),
+        [LOCATION_GAME]: () => puzzle(),
     });
 };
