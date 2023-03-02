@@ -24,7 +24,6 @@ import {
     ROW_INDEX_ATTRIBUTE,
     COLUMN_INDEX_ATTRIBUTE,
     BOARD_PADDING,
-    BASE_BOARD_SIZE,
     CELL_TO_MARGIN_RATIO,
 } from '../../../consts.js';
 
@@ -38,7 +37,7 @@ const calculateCellDimensions = (board) => {
     const rowCount = board.length;
     const units = window.innerWidth < window.innerHeight ? 'vw' : 'vh';
     // assuming for now that rowCount === columnCount always
-    const boardSize = (BASE_BOARD_SIZE - (2 * BOARD_PADDING));
+    const boardSize = (100 - (2 * BOARD_PADDING));
     const cellSize = Math.floor((1 - CELL_TO_MARGIN_RATIO) * (boardSize / rowCount));
     const margin = cellSize * CELL_TO_MARGIN_RATIO + units;
     return { margin, width: cellSize + units, height: cellSize + units };
@@ -80,7 +79,7 @@ export const initBoard = () => {
     // set initial color
     setBoardColor(container, st.colorTheme);
     // observer color theme changes
-    addStateObserver(['colorTheme'], ({ colorTheme }) => setBoardColor(colorTheme));
+    addStateObserver(['colorTheme'], ({ colorTheme }) => setBoardColor(container, colorTheme));
 
     const { board } = getState();
     // build row

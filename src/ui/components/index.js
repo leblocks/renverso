@@ -1,2 +1,2 @@
 export * from './board/index.js';
-export * from './status-line/index.js';
+export { default as initStatusLine } from './status-line/index.js';

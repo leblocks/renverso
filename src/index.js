@@ -3,7 +3,6 @@ import {
     puzzle,
     mainMenu,
     resizeBoard,
-    resizeStatusLine,
     levelSelectionMenu,
     colorSelectionMenu,
 } from './ui';
@@ -17,7 +16,6 @@ import {
 
 window.onresize = () => {
     resizeBoard();
-    resizeStatusLine();
 };
 
 window.onload = () => {

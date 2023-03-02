@@ -1,5 +1,6 @@
 import {
     createElement,
+    setCSSProperty,
 } from '../../web-api/index.js';
 
 import {
@@ -9,6 +10,7 @@ import {
 
 export default function puzzle() {
     const el = createElement('div');
+    setCSSProperty(el, 'height', '100%');
     el.appendChild(initBoard());
     el.appendChild(initStatusLine());
     return el;
