@@ -3,13 +3,9 @@ import {
     getClassList,
 } from '../../../web-api/index.js';
 
-import {
-    goto
-} from '../../../utils/index.js';
+import { goto } from '../../../utils/index.js';
 
-import {
-    LOCATION_MAIN_MENU
-} from '../../../state/consts.js';
+import { LOCATION_MAIN_MENU } from '../../../state/consts.js';
 
 
 const createStatusLineElement = (title, onclick) => {

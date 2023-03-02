@@ -7,6 +7,8 @@ export const COLUMN_INDEX_ATTRIBUTE = 'column_index';
 
 // color scheme
 // TODO colors
+// TODO add ui-menu-item colors
+// TODO add ui-menu colors
 export const COLOR_SCHEME_LIGHT = {
     id: 1,
     cell: 'white',

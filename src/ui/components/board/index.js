@@ -18,7 +18,7 @@ import {
     getCellColor,
     getBoardColor,
     getColorThemeById,
-} from '../../utils/index.js';
+} from '../../../utils/index.js';
 
 import {
     ROW_INDEX_ATTRIBUTE,
