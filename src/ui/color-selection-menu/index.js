@@ -1,5 +1,4 @@
-import { goto } from '../../utils/index.js';
-import { setState } from '../../state/index.js';
+import { goto, setTheme } from '../../utils/index.js';
 
 import {
     menu,
@@ -10,17 +9,17 @@ import {
 import { LOCATION_MAIN_MENU } from '../../state/consts.js';
 
 import {
-    COLOR_SCHEME_LIGHT,
-    COLOR_SCHEME_DARK,
-    COLOR_SCHEME_LAZY_EYE,
-} from '../../consts.js';
+    THEME_DARK,
+    THEME_LIGHT,
+    THEME_LAZY_EYE,
+} from '../../theme/consts.js';
 
 export default function colorSelectionMenu() {
     return menu([
         menuTitle('Select colpor theme'),
-        menuItem('Light', () => setState({ colorTheme: COLOR_SCHEME_LIGHT.id })),
-        menuItem('Dark', () => setState({ colorTheme: COLOR_SCHEME_DARK.id })),
-        menuItem('Lazy eye', () => setState({ colorTheme: COLOR_SCHEME_LAZY_EYE.id })),
+        menuItem('Light', () => setTheme(THEME_LIGHT)),
+        menuItem('Dark', () => setTheme(THEME_DARK)),
+        menuItem('Lazy eye', () => setTheme(THEME_LAZY_EYE)),
         menuItem('Back', () => goto(LOCATION_MAIN_MENU)),
     ]);
 }

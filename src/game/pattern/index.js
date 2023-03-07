@@ -30,7 +30,7 @@ export const wholeCrossPatternProvider = (rows, columns) => (row, col) => {
 };
 
 /**
- * Provides "small cross" pattern. Where together with flipped cell neightbors
+ * Provides "small cross" pattern. Where together with flipped cell neighbors
  * from top, bottom, left and right are getting flipped.
  * @param {number} rows Number of rows in game board.
  * @param {number} columns Number of columns in game board.

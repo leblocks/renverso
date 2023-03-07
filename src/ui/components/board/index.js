@@ -14,11 +14,16 @@ import {
     addStateObserver,
 } from '../../../state/index.js';
 
-import { 
-    getCellColor,
-    getBoardColor,
-    getColorThemeById,
-} from '../../../utils/index.js';
+import {
+    getStylesFor,
+    applyStyles,
+} from '../../../theme/index.js';
+
+import {
+    ELEMENT_CELL,
+    ELEMENT_BOARD,
+    ELEMENT_FLIPPED_CELL,
+} from '../../../theme/consts.js';
 
 import {
     ROW_INDEX_ATTRIBUTE,
@@ -59,14 +64,10 @@ const onCellClick = ({ target }) => {
     setState({ board });
 };
 
-const setBoardColor = (container, colorTheme) => {
-    const theme = getColorThemeById(colorTheme);
-    setCSSProperty(container, 'background-color', getBoardColor(theme));
-};
+const setBoardStyles = (element, theme) => applyStyles(element, getStylesFor(ELEMENT_BOARD, theme));
 
-const setCellColor = (cell, state, r, c) => {
-    setCSSProperty(cell, 'background-color', 
-        getCellColor(state.board[r][c], getColorThemeById(state.colorTheme)));
+const setCellStyles = (cell, isFlipped, theme) => {
+    applyStyles(cell, getStylesFor(isFlipped ? ELEMENT_CELL : ELEMENT_FLIPPED_CELL, theme));
 };
 
 /**
@@ -74,12 +75,12 @@ const setCellColor = (cell, state, r, c) => {
  */
 export const initBoard = () => {
     const st = getState();
-    const container = createElement('div');
-    getClassList(container).add('board');
+    const boardElement = createElement('div');
+    getClassList(boardElement).add('board');
     // set initial color
-    setBoardColor(container, st.colorTheme);
+    setBoardStyles(boardElement, st.theme);
     // observer color theme changes
-    addStateObserver(['colorTheme'], ({ colorTheme }) => setBoardColor(container, colorTheme));
+    addStateObserver(['theme'], ({ theme }) => setBoardStyles(boardElement, theme));
 
     const { board } = getState();
     // build row
@@ -96,15 +97,15 @@ export const initBoard = () => {
             addEventListener(cell, 'click', onCellClick);
             setCellDimensions(cell, calculateCellDimensions(board));
             // set initial color
-            setCellColor(cell, st, r, c);
+            setCellStyles(cell, st.board[r][c], st.theme);
             // observer color theme changes
-            addStateObserver(['board'], (state) => setCellColor(cell, state, r, c));
+            addStateObserver(['board'], (state) => setCellStyles(cell, state.board[r][c], state.theme));
 
             row.appendChild(cell);
         }
-        container.appendChild(row);
+        boardElement.appendChild(row);
     }
-    return container;
+    return boardElement;
 };
 
 /**
