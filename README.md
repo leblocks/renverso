@@ -12,6 +12,4 @@ logic game
 * disable parcel cache?
 * make sure that dist folder is being cleaned every time by parcel
 * transpile to es6 only, no need for es5 I think
-* move components folder to utils folder
 * continue button
-* tests for theme

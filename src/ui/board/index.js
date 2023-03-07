@@ -6,31 +6,31 @@ import {
     setCSSProperty,
     querySelectorAll,
     addEventListener,
-} from '../../../web-api/index.js';
+} from '../../web-api/index.js';
 
 import {
     getState,
     setState,
     addStateObserver,
-} from '../../../state/index.js';
+} from '../../state/index.js';
 
 import {
     getStylesFor,
     applyStyles,
-} from '../../../theme/index.js';
+} from '../../theme/index.js';
 
 import {
     ELEMENT_CELL,
     ELEMENT_BOARD,
     ELEMENT_FLIPPED_CELL,
-} from '../../../theme/consts.js';
+} from '../../theme/consts.js';
 
 import {
     ROW_INDEX_ATTRIBUTE,
     COLUMN_INDEX_ATTRIBUTE,
     BOARD_PADDING,
     CELL_TO_MARGIN_RATIO,
-} from '../../../consts.js';
+} from '../../consts.js';
 
 const setCellDimensions = (cell, { width, height, margin }) => {
     setCSSProperty(cell, 'width', width);

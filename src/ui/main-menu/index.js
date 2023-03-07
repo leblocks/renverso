@@ -1,4 +1,4 @@
-import { menu, menuItem, menuTitle } from '../utils/index.js';
+import { menu, menuItem, menuTitle } from '../components/index.js';
 import { goto } from '../../utils/index.js';
 
 import {

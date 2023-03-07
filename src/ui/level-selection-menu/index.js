@@ -3,13 +3,13 @@ import {
     LOCATION_MAIN_MENU,
 } from '../../state/consts.js';
 
-import { goto } from '../../utils/index.js';
+import { goto } from '../../utils/index.js'
 
 import {
     menu,
     menuItem,
     menuTitle,
-} from '../utils/index.js';
+} from '../components/index.js';
 
 export default function levelSelectionMenu() {
     return menu([

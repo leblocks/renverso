@@ -6,7 +6,7 @@ import {
 import {
     initBoard,
     initStatusLine,
-} from '../components/index.js';
+} from '../index.js';
 
 export default function puzzle() {
     const el = createElement('div');

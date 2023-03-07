@@ -20,9 +20,10 @@ import {
 import {
     THEME_DARK,
     THEME_LIGHT,
+    THEME_LAZY_EYE,
     ELEMENT_CELL,
-    CSS_BORDER,
     CSS_BACKGROUND_COLOR,
+    CSS_OUTLINE,
 } from '../../src/theme/consts.js';
 
 describe('theme tests', () => {
@@ -74,11 +75,11 @@ describe('theme tests', () => {
         assert.isEmpty(el.style[CSS_BACKGROUND_COLOR]);
         applyStyles(el, getStylesFor(ELEMENT_CELL, THEME_LIGHT));
         assert.isNotEmpty(el.style[CSS_BACKGROUND_COLOR]);
-        assert.isNotEmpty(el.style[CSS_BORDER]);
+        assert.isNotEmpty(el.style[CSS_OUTLINE]);
 
         // dark theme doesn't have CSS_BORDER style
-        applyStyles(el, getStylesFor(ELEMENT_CELL, THEME_DARK));
+        applyStyles(el, getStylesFor(ELEMENT_CELL, THEME_LAZY_EYE));
         assert.isNotEmpty(el.style[CSS_BACKGROUND_COLOR]);
-        assert.isEmpty(el.style[CSS_BORDER]);
+        assert.isEmpty(el.style[CSS_OUTLINE]);
     });
 });

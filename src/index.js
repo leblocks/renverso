@@ -4,7 +4,7 @@ import {
     mainMenu,
     resizeBoard,
     levelSelectionMenu,
-    colorSelectionMenu,
+    themeSelectionMenu,
 } from './ui';
 
 import {
@@ -22,7 +22,7 @@ window.onload = () => {
     router(LOCATION_MAIN_MENU, {
         [LOCATION_MAIN_MENU]: mainMenu(),
         [LOCATION_LEVEL_SELECTION_MENU]: levelSelectionMenu(),
-        [LOCATION_COLOR_SETTINGS]: colorSelectionMenu(),
+        [LOCATION_COLOR_SETTINGS]: themeSelectionMenu(),
         [LOCATION_GAME]: () => puzzle(),
     });
 };
