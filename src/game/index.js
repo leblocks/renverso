@@ -1,5 +1,3 @@
-// use pseudo random instead
-const getRandomInt = (max) => Math.floor(Math.random(42) * max);
 
 /**
  * Creates random level which requires at least 'stepsToSolve' to be solved.
@@ -24,26 +22,14 @@ export const getLevel = (rows, columns, stepsToSolve, patternCallback) => {
 };
 
 /**
- * Creates array with random coordinates on a board, without duplicates.
- *
+ * Creates array with random coordinates on a board.
  * @param {number} count Number of coordinates to create.
  * @returns {number[][]} Arrays with generated coordinates.
  */
 export const getRandomCoordinates = (count, rows, columns) => {
-    const hasDuplicate = (arr, [row, col]) => arr.some(([r, c]) => r === row && c === col);
+    const getRandomInt = (max) => Math.floor(Math.random() * max);
     const getRandomCoordinate = () => [getRandomInt(rows), getRandomInt(columns)];
-
-    const coords = [];
-    for (let i = 0; i < count; i += 1)
-    {
-        let coord = getRandomCoordinate();
-        while (hasDuplicate(coords, coord)) {
-            coord = getRandomCoordinate();
-        }
-        coords.push(coord);
-    }
-
-    return coords;
+    return [...Array(count)].map(() => getRandomCoordinate(rows, columns));
 };
 
 export * from './pattern/index.js';
