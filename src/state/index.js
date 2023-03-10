@@ -17,7 +17,7 @@ const state = { ...defaultState };
 
 // on various state updates -> notify observers
 // observer entry: { properties: [], callback }
-const stateObservers = [];
+let stateObservers = [];
 
 function updateState(stateUpdates, notifyObservers) {
     // update state
@@ -70,11 +70,11 @@ export function resetState() {
 /**
  * Registers state observer.
  * @param {string[]} properties List of state properties to listen.
- * @param {string} id Observer id.
+ * @param {string} name Observer name.
  * On state change `callback` will be called if state had updates in those properties.
  * @param {function} callback Callback to execute on state update.
  */
-export function addStateObserver(properties, callback, id) {
+export function addStateObserver(properties, callback, name) {
     const stateKeys = Object.keys(state);
     properties.forEach((prop) => {
         if (!stateKeys.includes(prop)) {
@@ -82,21 +82,15 @@ export function addStateObserver(properties, callback, id) {
         }
     });
 
-    if (id && stateObservers.findIndex((observer) => observer.id === id) > -1) {
-        throw new Error(`${id} is not a unique id in state observers list.`);
-    }
-    stateObservers.push({ properties, callback, id });
+    stateObservers.push({ properties, callback, name });
 }
 
 /**
  * Removes state observer by its id
- * @param {string} id Id of the observer to unsubscribe.
+ * @param {string} name Name of the observer to unsubscribe.
  */
-export function removeStateObserver(observerId) {
-    const i = stateObservers.findIndex(({ id }) => observerId === id);
-    if (i > -1) {
-        stateObservers.splice(i, 1);
-    }
+export function removeStateObserver(name) {
+    stateObservers = stateObservers.filter((observer) => observer.name !== name);
 }
 
 export function removeStateObservers() {

@@ -46,6 +46,22 @@ export const smallCrossPatternProvider = (rows, columns) => (row, col) => {
 };
 
 /**
+ * Provides "inverted cross" pattern. Where together with flipped cell neighbors
+ * from top, bottom, left and right are getting flipped.
+ * @param {number} rows Number of rows in game board.
+ * @param {number} columns Number of columns in game board.
+ * @returns {PatternCallback} Small cross pattern method.
+ */
+export const invertedCrossPatternProvider = (rows, columns) => (row, col) => {
+    const offsets = [[0, 0], [-1, -1], [-1, 1], [1, -1], [1, 1]];
+    return offsets
+        // filter out of bound coords
+        .filter((coord) => ((coord[0] + row) < rows) && ((coord[1] + col) < columns))
+        .filter((coord) => ((coord[0] + row) >= 0) && ((coord[1] + col) >= 0))
+        .map((coord) => [coord[0] + row, coord[1] + col]);
+};
+
+/**
  * Provides random pattern, from existing ones.
  * @param {number} rows Number of rows in game board.
  * @param {number} columns Number of columns in game board.
@@ -55,6 +71,7 @@ export const getRandomPatternProvider = (rows, columns) => {
     const patterns = [
         smallCrossPatternProvider,
         wholeCrossPatternProvider,
+        invertedCrossPatternProvider,
     ];
     // get random pattern
     return patterns[Math.floor((Math.random() * patterns.length))](rows, columns);

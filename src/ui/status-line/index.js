@@ -22,6 +22,6 @@ export default function initStatusLine() {
     const el = createElement('div');
     getClassList(el).add('status-line');
     el.appendChild(createStatusLineElement('back', () => goto(LOCATION_MAIN_MENU)));
-    el.appendChild(createStatusLineElement('rest', () => goto(LOCATION_RESET_MENU)));
+    el.appendChild(createStatusLineElement('reset', () => goto(LOCATION_RESET_MENU)));
     return el;
 }

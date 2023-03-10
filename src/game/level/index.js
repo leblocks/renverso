@@ -3,7 +3,10 @@ import {
     getRandomPatternProvider,
 } from '../pattern/index.js';
 
-import { setState } from '../../state/index.js';
+import {
+    setState,
+    setStateSilently
+} from '../../state/index.js';
 
 /**
  * @typedef {Object} Level
@@ -81,7 +84,8 @@ export const getLevel = ({
  */
 export const initLevel = (difficulty) => {
     const { board, solution, pattern } = getLevel({ ...difficulty });
-    setState({
-        board, solution, pattern, moves: [],
-    });
+    setState({ solution, pattern, moves: [] });
+    // there may be listeners from previous board, those are being cleaned in board creation
+    // so we don't want to trigger them before it will be cleaned. Not a cool maneuver
+    setStateSilently({ board });
 };

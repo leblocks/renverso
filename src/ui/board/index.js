@@ -72,13 +72,16 @@ const setCellStyles = (cell, isFlipped, theme) => {
  * Creates new board component, according to a current state.
  */
 export const initBoard = () => {
+    // clean previous cell/board observers if any.
+    removeStateObserver('board-theme-observer');
+    removeStateObserver('cell-board-observer');
+
     const st = getState();
     const boardElement = createElement('div');
     getClassList(boardElement).add('board');
     // set initial color
     setBoardStyles(boardElement, st.theme);
     // observer color theme changes
-    removeStateObserver('board-theme-observer');
     addStateObserver(['theme'], ({ theme }) => setBoardStyles(boardElement, theme), 'board-theme-observer');
 
     const { board } = getState();
@@ -98,9 +101,8 @@ export const initBoard = () => {
             // set initial color
             setCellStyles(cell, st.board[r][c], st.theme);
             // observer color theme changes
-            removeStateObserver(`cell-board-observer-${r}-${c}`);
             addStateObserver(['board'], (state) => setCellStyles(cell, state.board[r][c], state.theme),
-                `cell-board-observer-${r}-${c}`);
+                'cell-board-observer');
 
             row.appendChild(cell);
         }

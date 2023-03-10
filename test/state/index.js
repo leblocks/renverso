@@ -126,23 +126,11 @@ describe('state module tests', () => {
         expect(mustThrow).to.throw('non_existing_property is not key in the state.');
     });
 
-    it('add observer with duplicate id', () => {
-        const mustThrow = () => {
-            addStateObserver(['moves'], () => 'dumb string', 'nonUnique');
-        };
-
-        // add first time
-        mustThrow();
-
-        // add second time and fail
-        expect(mustThrow).to.throw('nonUnique is not a unique id in state observers list.');
-    });
-
-    it('unsubscribe observer by id', () => {
+    it('unsubscribe observer by name', () => {
         let callCount = 1;
         setState({ moves: 1 });
 
-        addStateObserver(['moves'], () => { callCount += 1; }, 'uniqueId');
+        addStateObserver(['moves'], () => { callCount += 1; }, 'name');
         setState({ moves: 1 });
         setState({ moves: 1 });
         setState({ moves: 1 });
@@ -150,10 +138,33 @@ describe('state module tests', () => {
         expect(callCount).to.eq(4);
 
         // remove state observer
-        removeStateObserver('uniqueId');
+        removeStateObserver('name');
         setState({ moves: 1 });
         setState({ moves: 1 });
         setState({ moves: 1 });
         expect(callCount).to.eq(4);
+    });
+
+    it('unsubscribe multiple observers by name', () => {
+        let callCount1 = 1;
+        let callCount2 = 1;
+        setState({ moves: 1 });
+
+        addStateObserver(['moves'], () => { callCount1 += 1; }, 'name');
+        addStateObserver(['moves'], () => { callCount2 += 1; }, 'name');
+        setState({ moves: 1 });
+        setState({ moves: 1 });
+        setState({ moves: 1 });
+        expect(getState().moves).to.eq(1);
+        expect(callCount1).to.eq(4);
+        expect(callCount2).to.eq(4);
+
+        // remove state observer
+        removeStateObserver('name');
+        setState({ moves: 1 });
+        setState({ moves: 1 });
+        setState({ moves: 1 });
+        expect(callCount1).to.eq(4);
+        expect(callCount2).to.eq(4);
     });
 });

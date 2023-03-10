@@ -6,7 +6,6 @@ import { setCSSProperty } from '../../web-api/index.js';
 import { menuItem } from '../components/index.js';
 import { goto } from '../../utils/index.js';
 
-// TODO test it
 export default function continueButton() {
     const el = menuItem('Continue', () => goto(LOCATION_GAME));
     setCSSProperty(el, 'display', 'none');
