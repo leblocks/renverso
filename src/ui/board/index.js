@@ -19,6 +19,8 @@ import {
     applyStyles,
 } from '../../theme/index.js';
 
+import { flipCells } from '../../game/index.js';
+
 import {
     ELEMENT_CELL,
     ELEMENT_BOARD,
@@ -55,12 +57,7 @@ const onCellClick = ({ target }) => {
     const { board, pattern } = getState();
     const row = parseInt(getAttribute(target, ROW_INDEX_ATTRIBUTE), 10);
     const col = parseInt(getAttribute(target, COLUMN_INDEX_ATTRIBUTE), 10);
-
-    pattern(row, col) // flip cells calculated by pattern
-        .forEach(([r, c]) => {
-            board[r][c] = !board[r][c];
-        });
-
+    flipCells(row, col, pattern, board);
     setState({ board });
 };
 
