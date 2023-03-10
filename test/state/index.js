@@ -14,6 +14,7 @@ import {
     addStateObserver,
     setStateSilently,
     removeStateObservers,
+    removeStateObserver,
 } from '../../src/state/index.js';
 
 import { LOCATION_MAIN_MENU, LOCATION_TUTORIAL } from '../../src/state/consts.js';
@@ -123,5 +124,36 @@ describe('state module tests', () => {
             addStateObserver(['non_existing_property'], () => 'dumb string');
         };
         expect(mustThrow).to.throw('non_existing_property is not key in the state.');
+    });
+
+    it('add observer with duplicate id', () => {
+        const mustThrow = () => {
+            addStateObserver(['moves'], () => 'dumb string', 'nonUnique');
+        };
+
+        // add first time
+        mustThrow();
+
+        // add second time and fail
+        expect(mustThrow).to.throw('nonUnique is not a unique id in state observers list.');
+    });
+
+    it('unsubscribe observer by id', () => {
+        let callCount = 1;
+        setState({ moves: 1 });
+
+        addStateObserver(['moves'], () => { callCount += 1; }, 'uniqueId');
+        setState({ moves: 1 });
+        setState({ moves: 1 });
+        setState({ moves: 1 });
+        expect(getState().moves).to.eq(1);
+        expect(callCount).to.eq(4);
+
+        // remove state observer
+        removeStateObserver('uniqueId');
+        setState({ moves: 1 });
+        setState({ moves: 1 });
+        setState({ moves: 1 });
+        expect(callCount).to.eq(4);
     });
 });

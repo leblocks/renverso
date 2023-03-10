@@ -13,3 +13,5 @@ logic game
 * make sure that dist folder is being cleaned every time by parcel
 * transpile to es6 only, no need for es5 I think
 * continue button
+* reset button
+* new level

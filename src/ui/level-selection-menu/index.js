@@ -3,7 +3,14 @@ import {
     LOCATION_MAIN_MENU,
 } from '../../state/consts.js';
 
-import { goto } from '../../utils/index.js'
+import {
+    LEVEL_EASY,
+    LEVEL_MEDIUM,
+    LEVEL_HARD,
+    initLevel,
+} from '../../game/index.js';
+
+import { goto } from '../../utils/index.js';
 
 import {
     menu,
@@ -11,12 +18,17 @@ import {
     menuTitle,
 } from '../components/index.js';
 
+const startGame = (difficulty) => {
+    initLevel(difficulty);
+    goto(LOCATION_GAME);
+};
+
 export default function levelSelectionMenu() {
     return menu([
         menuTitle('Select level'),
-        menuItem('Easy', () => goto(LOCATION_GAME)),
-        menuItem('Medium', () => goto(LOCATION_MAIN_MENU)),
-        menuItem('Hard', () => goto(LOCATION_MAIN_MENU)),
+        menuItem('Easy', () => startGame(LEVEL_EASY)),
+        menuItem('Medium', () => startGame(LEVEL_MEDIUM)),
+        menuItem('Hard', () => startGame(LEVEL_HARD)),
         menuItem('Back', () => goto(LOCATION_MAIN_MENU)),
     ]);
 }

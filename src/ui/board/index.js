@@ -12,6 +12,7 @@ import {
     getState,
     setState,
     addStateObserver,
+    removeStateObserver,
 } from '../../state/index.js';
 
 import {
@@ -77,7 +78,8 @@ export const initBoard = () => {
     // set initial color
     setBoardStyles(boardElement, st.theme);
     // observer color theme changes
-    addStateObserver(['theme'], ({ theme }) => setBoardStyles(boardElement, theme));
+    removeStateObserver('board-theme-observer');
+    addStateObserver(['theme'], ({ theme }) => setBoardStyles(boardElement, theme), 'board-theme-observer');
 
     const { board } = getState();
     // build row
@@ -96,7 +98,9 @@ export const initBoard = () => {
             // set initial color
             setCellStyles(cell, st.board[r][c], st.theme);
             // observer color theme changes
-            addStateObserver(['board'], (state) => setCellStyles(cell, state.board[r][c], state.theme));
+            removeStateObserver(`cell-board-observer-${r}-${c}`);
+            addStateObserver(['board'], (state) => setCellStyles(cell, state.board[r][c], state.theme),
+                `cell-board-observer-${r}-${c}`);
 
             row.appendChild(cell);
         }

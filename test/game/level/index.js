@@ -10,6 +10,9 @@ import {
     flipCells,
     getRandomCoordinates,
     wholeCrossPatternProvider,
+    LEVEL_EASY,
+    LEVEL_MEDIUM,
+    LEVEL_HARD,
 } from '../../../src/game/index.js';
 
 describe('game logic tests', () => {
@@ -30,7 +33,12 @@ describe('game logic tests', () => {
             board,
             pattern,
             solution,
-        } = getLevel(rows, columns, 10, wholeCrossPatternProvider(rows, columns));
+        } = getLevel({
+            rows,
+            columns,
+            stepsToSolve: 10,
+            pattern: wholeCrossPatternProvider(rows, columns),
+        });
 
         for (let i = solution.length - 1; i >= 0; i -= 1) {
             const [row, column] = solution[i];
@@ -39,5 +47,19 @@ describe('game logic tests', () => {
 
         const isSolved = board.every((row) => row.every((cell) => cell));
         assert.isTrue(isSolved);
+    });
+
+    it('various level difficulties are solvable', () => {
+        [LEVEL_EASY, LEVEL_MEDIUM, LEVEL_HARD]
+            .forEach((difficulty) => {
+                const { board, pattern, solution } = getLevel({ ...difficulty });
+                for (let i = solution.length - 1; i >= 0; i -= 1) {
+                    const [row, column] = solution[i];
+                    flipCells(row, column, pattern, board);
+                }
+
+                const isSolved = board.every((row) => row.every((cell) => cell));
+                assert.isTrue(isSolved);
+            });
     });
 });

@@ -3,21 +3,12 @@ import { LOCATION_MAIN_MENU } from './consts.js';
 
 import { THEME_LIGHT } from '../theme/consts.js';
 
-import { wholeCrossPatternProvider } from '../game/index.js';
-
 const defaultState = {
     location: LOCATION_MAIN_MENU,
-    // TODO debug data
-    board: [
-        [false, false, false, false],
-        [false, false, false, false],
-        [false, false, false, false],
-        [false, false, false, false],
-    ],
+    board: [],
     moves: [],
     solution: [],
-    // TODO debug data
-    pattern: wholeCrossPatternProvider(4, 4),
+    pattern: null,
     theme: THEME_LIGHT,
 };
 
@@ -79,17 +70,33 @@ export function resetState() {
 /**
  * Registers state observer.
  * @param {string[]} properties List of state properties to listen.
+ * @param {string} id Observer id.
  * On state change `callback` will be called if state had updates in those properties.
  * @param {function} callback Callback to execute on state update.
  */
-export function addStateObserver(properties, callback) {
+export function addStateObserver(properties, callback, id) {
     const stateKeys = Object.keys(state);
     properties.forEach((prop) => {
         if (!stateKeys.includes(prop)) {
             throw new Error(`${prop} is not key in the state.`);
         }
     });
-    stateObservers.push({ properties, callback });
+
+    if (id && stateObservers.findIndex((observer) => observer.id === id) > -1) {
+        throw new Error(`${id} is not a unique id in state observers list.`);
+    }
+    stateObservers.push({ properties, callback, id });
+}
+
+/**
+ * Removes state observer by its id
+ * @param {string} id Id of the observer to unsubscribe.
+ */
+export function removeStateObserver(observerId) {
+    const i = stateObservers.findIndex(({ id }) => observerId === id);
+    if (i > -1) {
+        stateObservers.splice(i, 1);
+    }
 }
 
 export function removeStateObservers() {

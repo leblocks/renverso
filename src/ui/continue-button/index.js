@@ -8,7 +8,7 @@ import { goto } from '../../utils/index.js';
 
 // TODO test it
 export default function continueButton() {
-    const el = menuItem('continue', () => goto(LOCATION_GAME));
+    const el = menuItem('Continue', () => goto(LOCATION_GAME));
     setCSSProperty(el, 'display', 'none');
 
     // pattern being changed only on new level

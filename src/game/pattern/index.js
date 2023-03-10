@@ -57,5 +57,5 @@ export const getRandomPatternProvider = (rows, columns) => {
         wholeCrossPatternProvider,
     ];
     // get random pattern
-    return patterns[(Math.random() * patterns.length) - 1](rows, columns);
+    return patterns[Math.floor((Math.random() * patterns.length))](rows, columns);
 };
