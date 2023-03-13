@@ -30,6 +30,7 @@ describe('board tests', () => {
     it('cell click flips correct cells', () => {
         setState({
             location: 'GAME_STATE',
+            moves: [],
             board: [
                 [false, false, false, false],
                 [false, false, false, false],

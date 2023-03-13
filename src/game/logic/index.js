@@ -15,3 +15,23 @@ export const flipCells = (row, column, pattern, board) => {
         });
     return flippedBoard;
 };
+
+/**
+ * @typedef {Object} MoveResult
+ * @property {bool[][]} board New board state.
+ * @property {number[][]} moves Updated array with player moves on a current board.
+ */
+
+/**
+ * Main game logic happens during click on a cell.
+ * @param {number} row Row number on a board.
+ * @param {number} column Column number on a board.
+ * @param {Object} state Current game state.
+ * @returns {MoveResult} Updated game state as result from making a move.
+ */
+export const makeMove = (row, col, { board, pattern, moves }) => {
+    return {
+        board: flipCells(row, col, pattern, board),
+        moves: [...moves, [row, col]],
+    };
+};

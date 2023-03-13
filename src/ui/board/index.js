@@ -20,7 +20,7 @@ import {
     applyStyles,
 } from '../../theme/index.js';
 
-import { flipCells } from '../../game/index.js';
+import { makeMove } from '../../game/index.js';
 
 import {
     ELEMENT_CELL,
@@ -55,11 +55,10 @@ const calculateCellDimensions = (board) => {
  * @param {Event} e Cell onclick event handler.
  */
 const onCellClick = ({ target }) => {
-    const { board, pattern } = getState();
+    const state = getState();
     const row = parseInt(getAttribute(target, ROW_INDEX_ATTRIBUTE), 10);
     const col = parseInt(getAttribute(target, COLUMN_INDEX_ATTRIBUTE), 10);
-    const flippedBoard = flipCells(row, col, pattern, board);
-    setState({ board: flippedBoard });
+    setState({ ...makeMove(row, col, state) });
 };
 
 const setBoardStyles = (element, theme) => applyStyles(element, getStylesFor(ELEMENT_BOARD, theme));
