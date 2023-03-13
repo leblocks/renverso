@@ -58,8 +58,8 @@ const onCellClick = ({ target }) => {
     const { board, pattern } = getState();
     const row = parseInt(getAttribute(target, ROW_INDEX_ATTRIBUTE), 10);
     const col = parseInt(getAttribute(target, COLUMN_INDEX_ATTRIBUTE), 10);
-    flipCells(row, col, pattern, board);
-    setState({ board });
+    const flippedBoard = flipCells(row, col, pattern, board);
+    setState({ board: flippedBoard });
 };
 
 const setBoardStyles = (element, theme) => applyStyles(element, getStylesFor(ELEMENT_BOARD, theme));

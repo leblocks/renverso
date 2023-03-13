@@ -29,20 +29,19 @@ describe('game logic tests', () => {
 
     it('getLevel produces solvable level', () => {
         const [rows, columns] = [5, 5];
-        const {
-            board,
-            pattern,
-            solution,
-        } = getLevel({
+        const level = getLevel({
             rows,
             columns,
             stepsToSolve: 10,
             pattern: wholeCrossPatternProvider(rows, columns),
         });
 
+        const { pattern, solution } = level;
+        let { board } = level;
+
         for (let i = solution.length - 1; i >= 0; i -= 1) {
             const [row, column] = solution[i];
-            flipCells(row, column, pattern, board);
+            board = flipCells(row, column, pattern, board);
         }
 
         const isSolved = board.every((row) => row.every((cell) => cell));
@@ -52,10 +51,12 @@ describe('game logic tests', () => {
     it('various level difficulties are solvable', () => {
         [LEVEL_EASY, LEVEL_MEDIUM, LEVEL_HARD]
             .forEach((difficulty) => {
-                const { board, pattern, solution } = getLevel({ ...difficulty });
+                const level = getLevel({ ...difficulty });
+                const { pattern, solution } = level;
+                let { board } = level;
                 for (let i = solution.length - 1; i >= 0; i -= 1) {
                     const [row, column] = solution[i];
-                    flipCells(row, column, pattern, board);
+                    board = flipCells(row, column, pattern, board);
                 }
 
                 const isSolved = board.every((row) => row.every((cell) => cell));

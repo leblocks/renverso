@@ -3,6 +3,8 @@ import {
     getRandomPatternProvider,
 } from '../pattern/index.js';
 
+import { flipCells } from '../logic/index.js';
+
 import {
     setState,
     setStateSilently
@@ -43,22 +45,6 @@ export const getRandomCoordinates = (count, rows, columns) => {
     return [...Array(count)].map(() => getRandomCoordinate(rows, columns));
 };
 
-// TODO move to logic
-/**
- * Flips cells on a board accroding to provided row, col and pattern.
- * @param {number} row Row number on a board.
- * @param {number} column Column number on a board.
- * @param {PatternCallback} pattern - The way of flipping.
- * @param {bool[][]} board Array of booleans representing current board state.
- */
-export const flipCells = (row, column, pattern, board) => {
-    pattern(row, column)
-        .forEach(([r, c]) => {
-            // TODO fix reassignment
-            board[r][c] = !board[r][c];
-        });
-};
-
 /**
  * Creates random level which requires at least 'stepsToSolve' to be solved.
  * @param {LevelDifficulty} level Required level difficulty.
@@ -69,11 +55,11 @@ export const getLevel = ({
     rows, columns, stepsToSolve, pattern,
 }) => {
     // create initial solved board
-    const board = [...Array(rows)].map(() => Array(columns).fill(true));
+    let board = [...Array(rows)].map(() => Array(columns).fill(true));
     // click 'stepsToSolve' times on board to create shuffled one
     const solution = getRandomCoordinates(stepsToSolve, rows, columns);
     // shuffle board
-    solution.forEach(([r, c]) => flipCells(r, c, pattern, board));
+    solution.forEach(([r, c]) => board = flipCells(r, c, pattern, board));
 
     return { board, solution, pattern };
 };
