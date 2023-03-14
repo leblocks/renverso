@@ -35,3 +35,23 @@ export const makeMove = (row, col, { board, pattern, moves }) => {
         moves: [...moves, [row, col]],
     };
 };
+
+/**
+ * Undoes player last move if there was any.
+ * @param {Object} state Current game state.
+ * @returns {MoveResult} Updated game state as result from making a move.
+ */
+export const undoMove = ({ board, pattern, moves }) => {
+    if (moves.length === 0) {
+        // do nothing
+        return { board, moves };
+    }
+
+    const newMoves = [...moves];
+    const [row, col] = newMoves.pop();
+
+    return {
+        board: flipCells(row, col, pattern, board),
+        moves: newMoves,
+    };
+};

@@ -7,6 +7,7 @@ import {
 
 import {
     makeMove,
+    undoMove,
     smallCrossPatternProvider,
 } from '../../../src/game/index.js';
 
@@ -31,6 +32,44 @@ describe('game logic tests', () => {
             [false, true, false],
             [true, true, true],
             [false, true, false],
+        ]);
+    });
+
+    it('undoMove do nothing on empty moves', () => {
+        const board = [
+            [false, false, false],
+            [false, false, false],
+            [false, false, false],
+        ];
+
+        const moves = [];
+
+        const moveResult = undoMove({ board, moves, pattern: smallCrossPatternProvider(3, 3) });
+
+        expect(moveResult.moves).to.be.an('array').and.to.deep.eq([]);
+        expect(moveResult.board).to.deep.eq([
+            [false, false, false],
+            [false, false, false],
+            [false, false, false],
+        ]);
+    });
+
+    it('undoMove correctly undo move', () => {
+        const board = [
+            [false, true, false],
+            [true, true, true],
+            [false, true, false],
+        ];
+
+        const moves = [[1, 1]];
+
+        const moveResult = undoMove({ board, moves, pattern: smallCrossPatternProvider(3, 3) });
+
+        expect(moveResult.moves).to.be.an('array').and.to.deep.eq([]);
+        expect(moveResult.board).to.deep.eq([
+            [false, false, false],
+            [false, false, false],
+            [false, false, false],
         ]);
     });
 });
