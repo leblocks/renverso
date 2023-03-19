@@ -1,4 +1,16 @@
-import { createElement, getClassList } from '../../../web-api/index.js';
+import {
+    createElement,
+    getClassList
+} from '../../../web-api/index.js';
+
+import {
+    applyStyles,
+    getStylesFor,
+} from '../../../theme/index.js';
+
+import { addStateObserver } from '../../../state/index.js';
+
+import { ELEMENT_MENU_ITEM } from '../../../theme/consts.js';
 
 /**
  * Creates menu-item element on top of button HTML element.
@@ -10,5 +22,10 @@ export default function menuItem(title, onClick) {
     element.innerText = title;
     element.onclick = onClick;
     getClassList(element).add('ui-menu-item');
+
+    addStateObserver(['theme'], ({ theme }) => {
+        applyStyles(element, getStylesFor(ELEMENT_MENU_ITEM, theme))
+    }, 'menu-item-theme-observer');
+
     return element;
 }

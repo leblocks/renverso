@@ -6,3 +6,4 @@ export const ROW_INDEX_ATTRIBUTE = 'row_index';
 export const COLUMN_INDEX_ATTRIBUTE = 'column_index';
 
 export const CELL_OUTLINE = '5px';
+export const STATUS_LINE_BUTTON_OUTLINE = '2px';

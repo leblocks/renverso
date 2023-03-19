@@ -8,6 +8,8 @@ import {
     themeSelectionMenu,
 } from './ui';
 
+import { setState } from './state/index.js';
+
 import {
     LOCATION_GAME,
     LOCATION_MAIN_MENU,
@@ -28,4 +30,7 @@ window.onload = () => {
         [LOCATION_GAME]: () => puzzle(),
         [LOCATION_RESET_MENU]: resetMenu(),
     });
+
+    // workaround to enfore styling
+    setState({ theme: 'light' });
 };
