@@ -24,7 +24,6 @@ const undo = () => {
     setState({ ...undoMove(state) });
 };
 
-
 export default function initStatusLine() {
     const el = createElement('div');
     getClassList(el).add('status-line');

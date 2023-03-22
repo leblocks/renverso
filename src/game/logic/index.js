@@ -39,7 +39,7 @@ export const makeMove = (row, col, { board, pattern, moves }) => {
 /**
  * Undoes player last move if there was any.
  * @param {Object} state Current game state.
- * @returns {MoveResult} Updated game state as result from making a move.
+ * @returns {MoveResult} Updated game state as result from undoing a move.
  */
 export const undoMove = ({ board, pattern, moves }) => {
     if (moves.length === 0) {
@@ -54,4 +54,21 @@ export const undoMove = ({ board, pattern, moves }) => {
         board: flipCells(row, col, pattern, board),
         moves: newMoves,
     };
+};
+
+/**
+ * Undoes all player moves if there were any.
+ * @param {Object} state Current game state.
+ * @returns {MoveResult} Updated game state as result from resetting board.
+ */
+export const resetBoard = ({ board, pattern, moves }) => {
+    let newMoves = [...moves];
+    let newBoard = board.map(row => row.map(cell => cell));
+
+    while (newMoves.length > 0) {
+        const updated = undoMove({ board: newBoard, pattern, moves: newMoves });
+        newBoard = updated.board;
+        newMoves = updated.moves;
+    }
+    return { board: newBoard, moves: newMoves };
 };

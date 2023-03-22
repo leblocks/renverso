@@ -1,7 +1,7 @@
 import {
     createElement,
     getClassList,
-} from "../../../web-api";
+} from "../../../web-api/index.js";
 
 import {
     applyStyles,

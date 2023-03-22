@@ -15,7 +15,7 @@ import {
     LEVEL_HARD,
 } from '../../../src/game/index.js';
 
-describe('game logic tests', () => {
+describe('level tests', () => {
     it('getRandomCoordinates 10000 coordinates', () => {
         const coords = getRandomCoordinates(10000, 5, 5);
         expect(coords).to.be.an('array').with.lengthOf(10000);

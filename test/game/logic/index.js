@@ -8,6 +8,8 @@ import {
 import {
     makeMove,
     undoMove,
+    getLevel,
+    resetBoard,
     smallCrossPatternProvider,
 } from '../../../src/game/index.js';
 
@@ -70,6 +72,42 @@ describe('game logic tests', () => {
             [false, false, false],
             [false, false, false],
             [false, false, false],
+        ]);
+    });
+
+    it('resetBoard correctly resets board with 0 moves', () => {
+        const board = [
+            [false, true, false],
+            [true, true, true],
+            [false, true, false],
+        ];
+
+        const moves = [];
+
+        const reset = resetBoard({ board, moves, pattern: smallCrossPatternProvider(3, 3) });
+        expect(reset.moves).to.be.an('array').and.to.deep.eq([]);
+        expect(reset.board).to.deep.eq([
+            [false, true, false],
+            [true, true, true],
+            [false, true, false],
+        ]);
+    });
+
+    it('resetBoard correctly resets board', () => {
+        const { board, solution, pattern } = getLevel({
+            rows: 3,
+            columns: 3,
+            stepsToSolve: 10,
+            pattern: smallCrossPatternProvider(3, 3),
+        });
+
+        const reset = resetBoard({ board, moves: solution, pattern });
+
+        expect(reset.moves).to.be.an('array').and.to.deep.eq([]);
+        expect(reset.board).to.deep.eq([
+            [true, true, true],
+            [true, true, true],
+            [true, true, true],
         ]);
     });
 });
