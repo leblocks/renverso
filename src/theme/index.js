@@ -80,6 +80,7 @@ export const themes = {
             [CSS_BACKGROUND_COLOR, 'black'],
         ],
         [ELEMENT_STATUS_LINE_BUTTON]: [
+            [CSS_COLOR, 'white'],
             [CSS_OUTLINE, `${STATUS_LINE_BUTTON_OUTLINE} solid white`],
             [CSS_OUTLINE_OFFSET, `-${STATUS_LINE_BUTTON_OUTLINE}`],
         ],
@@ -108,6 +109,7 @@ export const themes = {
             [CSS_BACKGROUND_COLOR, 'black'],
         ],
         [ELEMENT_STATUS_LINE_BUTTON]: [
+            [CSS_COLOR, 'blue'],
             [CSS_OUTLINE, `${STATUS_LINE_BUTTON_OUTLINE} solid red`],
             [CSS_OUTLINE_OFFSET, `-${STATUS_LINE_BUTTON_OUTLINE}`],
         ],
