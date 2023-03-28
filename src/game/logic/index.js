@@ -72,3 +72,12 @@ export const resetBoard = ({ board, pattern, moves }) => {
     }
     return { board: newBoard, moves: newMoves };
 };
+
+/**
+ * Checks if board is solved.
+ * @param {bool[][]} board Array of booleans representing current board state.
+ * @returns {boolean} true if board is sovled.
+ */
+export const isBoardSolved = (board) => {
+    return board.every(row => row.every(cell => cell));
+};

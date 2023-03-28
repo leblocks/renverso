@@ -15,12 +15,16 @@ import {
     removeStateObserver,
 } from '../../state/index.js';
 
+import { LOCATION_WINNER_MENU } from '../../state/consts.js';
+
 import {
     getStylesFor,
     applyStyles,
 } from '../../theme/index.js';
 
-import { makeMove } from '../../game/index.js';
+import { isBoardSolved, makeMove } from '../../game/index.js';
+
+import { goto } from '../../utils/index.js';
 
 import {
     ELEMENT_CELL,
@@ -59,6 +63,14 @@ const onCellClick = ({ target }) => {
     const row = parseInt(getAttribute(target, ROW_INDEX_ATTRIBUTE), 10);
     const col = parseInt(getAttribute(target, COLUMN_INDEX_ATTRIBUTE), 10);
     setState({ ...makeMove(row, col, state) });
+
+    // if board is solved after players move
+    // activate winning logic
+    if (isBoardSolved(getState().board)) {
+        // TODO some animation here?
+        // TODO goto winning menu
+        goto(LOCATION_WINNER_MENU);
+    }
 };
 
 const setBoardStyles = (element, theme) => applyStyles(element, getStylesFor(ELEMENT_BOARD, theme));

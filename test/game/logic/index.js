@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect, assert } from 'chai';
 
 import {
     it,
@@ -10,6 +10,7 @@ import {
     undoMove,
     getLevel,
     resetBoard,
+    isBoardSolved,
     smallCrossPatternProvider,
 } from '../../../src/game/index.js';
 
@@ -109,5 +110,25 @@ describe('game logic tests', () => {
             [true, true, true],
             [true, true, true],
         ]);
+    });
+
+    it('isBoardSolved for solved board', () => {
+        const board = [
+            [true, true, true],
+            [true, true, true],
+            [true, true, true],
+        ];
+
+        assert.isTrue(isBoardSolved(board));
+    });
+
+    it('isBoardSolved for non-solved board', () => {
+        const board = [
+            [true, true, true],
+            [true, true, false],
+            [true, true, true],
+        ];
+
+        assert.isFalse(isBoardSolved(board));
     });
 });

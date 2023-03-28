@@ -3,6 +3,7 @@ import {
     puzzle,
     mainMenu,
     resetMenu,
+    winnerMenu,
     resizeBoard,
     levelSelectionMenu,
     themeSelectionMenu,
@@ -14,6 +15,7 @@ import {
     LOCATION_GAME,
     LOCATION_MAIN_MENU,
     LOCATION_RESET_MENU,
+    LOCATION_WINNER_MENU,
     LOCATION_COLOR_SETTINGS,
     LOCATION_LEVEL_SELECTION_MENU,
 } from './state/consts.js';
@@ -29,6 +31,7 @@ window.onload = () => {
         [LOCATION_COLOR_SETTINGS]: themeSelectionMenu(),
         [LOCATION_GAME]: () => puzzle(),
         [LOCATION_RESET_MENU]: resetMenu(),
+        [LOCATION_WINNER_MENU]: winnerMenu(),
     });
 
     // workaround to enfore styling
