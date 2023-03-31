@@ -3,10 +3,8 @@ import {
     setCSSProperty,
 } from '../../web-api/index.js';
 
-import {
-    initBoard,
-    initStatusLine,
-} from '../index.js';
+import { initBoard } from '../board/index.js';
+import initStatusLine from '../status-line/index.js';
 
 export default function puzzle() {
     const el = createElement('div');

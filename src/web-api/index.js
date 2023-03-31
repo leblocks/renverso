@@ -60,3 +60,10 @@ export const addEventListener = (el, event, callback) => el.addEventListener(eve
  * @param {string} value CSS property value.
  */
 export const setCSSProperty = (el, name, value) => el.style.setProperty(name, value);
+
+/**
+ * Wrapper for https://developer.mozilla.org/en-US/docs/Web/API/setTimeout.
+ * @param {function} callback A code to execute.
+ * @param {number} delay Delay in ms.
+ */
+export const setTimeout = (callback, delay) => window.setTimeout(callback, delay);

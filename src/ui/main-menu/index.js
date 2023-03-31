@@ -6,7 +6,7 @@ import {
 
 import { goto } from '../../utils/index.js';
 
-import { continueButton } from '../../ui/index.js';
+import continueButton from '../continue-button/index.js';
 
 import {
     LOCATION_LEVEL_SELECTION_MENU,

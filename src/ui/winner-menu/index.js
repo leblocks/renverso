@@ -1,6 +1,9 @@
 import { goto } from '../../utils/index.js';
 
-import { getState } from '../../state/index.js';
+import {
+    setState,
+    getState,
+} from '../../state/index.js';
 
 import {
     LOCATION_MAIN_MENU,
@@ -12,12 +15,23 @@ import {
     menuTitle,
 } from '../components/index.js';
 
+const gotoMainMenu = () => {
+    setState({
+        board: [],
+        moves: [],
+        solution: [],
+        pattern: null,
+        location: LOCATION_MAIN_MENU,
+    });
+};
+
+const conjugateMoves = (moves) => `move${moves.length > 1 ? 's' : ''}`;
+
 export default function winnerMenu() {
-    const { solution, moves } = getState();
+    const { moves } = getState();
     return menu([
-        menuTitle($`Puzzle solved in ${moves.length} moves!`),
+        menuTitle(`Puzzle solved in ${moves.length} ${conjugateMoves(moves)}!`),
         menuItem('Share puzzle!', () => goto(LOCATION_MAIN_MENU)),
-        menuItem(`Show generated solution (${solution.length} moves)`, () => goto(LOCATION_MAIN_MENU)),
-        menuItem('Back to main menu', () => goto(LOCATION_MAIN_MENU)),
+        menuItem('Back to main menu', gotoMainMenu),
     ]);
 }

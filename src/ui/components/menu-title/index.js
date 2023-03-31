@@ -1,6 +1,6 @@
 import {
     createElement,
-    getClassList
+    getClassList,
 } from '../../../web-api/index.js';
 
 import {
@@ -8,7 +8,10 @@ import {
     getStylesFor,
 } from '../../../theme/index.js';
 
-import { addStateObserver } from '../../../state/index.js';
+import {
+    getState,
+    addStateObserver,
+} from '../../../state/index.js';
 
 import { ELEMENT_MENU_TITLE } from '../../../theme/consts.js';
 
@@ -22,8 +25,10 @@ export default function menuTitle(title) {
     element.disabled = true;
     getClassList(element).add('ui-menu-title');
 
+    // set initial styling on element
+    applyStyles(element, getStylesFor(ELEMENT_MENU_TITLE, getState().theme));
     addStateObserver(['theme'], ({ theme }) => {
-        applyStyles(element, getStylesFor(ELEMENT_MENU_TITLE, theme))
+        applyStyles(element, getStylesFor(ELEMENT_MENU_TITLE, theme));
     }, 'menu-theme-observer');
 
     return element;

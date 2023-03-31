@@ -16,7 +16,7 @@ import {
 
 import {
     LOCATION_MAIN_MENU,
-    LOCATION_RESET_MENU
+    LOCATION_RESET_MENU,
 } from '../../state/consts.js';
 
 const undo = () => {

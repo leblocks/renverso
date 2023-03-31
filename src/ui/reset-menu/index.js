@@ -11,7 +11,7 @@ import {
 } from '../components/index.js';
 
 import {
-    resetBoard
+    resetBoard,
 } from '../../game/logic/index.js';
 
 import {

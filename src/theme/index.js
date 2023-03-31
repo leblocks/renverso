@@ -1,6 +1,6 @@
 import { setCSSProperty } from '../web-api/index.js';
 
-import { 
+import {
     CELL_OUTLINE,
     STATUS_LINE_BUTTON_OUTLINE,
 } from '../consts.js';
@@ -127,7 +127,14 @@ export const themes = {
  * @param {string} theme Name of the theme to lookup styles from.
  * @return {ElementStyle[]} List of styles.
  */
-export const getStylesFor = (element, theme) => (themes[theme] ? (themes[theme][element] ? themes[theme][element] : []) : []);
+export const getStylesFor = (element, theme) => {
+    if (themes[theme]) {
+        if (themes[theme][element]) {
+            return themes[theme][element];
+        }
+    }
+    return [];
+};
 
 /**
  * Applies theme defined styles on the element.
@@ -142,7 +149,12 @@ export const applyStyles = (element, styles) => {
         .forEach((theme) => {
             Object.values(theme)
                 // iterate over components in theme and reset styles
-                .forEach((style) => style.forEach(([property, _]) => element.style[property] = ''));
+                .forEach((style) => {
+                    for (let i = 0; i < style.length; i += 1) {
+                        // eslint-disable-next-line no-param-reassign
+                        element.style[style[i][0]] = '';
+                    }
+                });
         });
 
     styles.forEach(([property, value]) => {

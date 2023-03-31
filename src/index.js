@@ -31,7 +31,7 @@ window.onload = () => {
         [LOCATION_COLOR_SETTINGS]: themeSelectionMenu(),
         [LOCATION_GAME]: () => puzzle(),
         [LOCATION_RESET_MENU]: resetMenu(),
-        [LOCATION_WINNER_MENU]: winnerMenu(),
+        [LOCATION_WINNER_MENU]: () => winnerMenu(),
     });
 
     // workaround to enfore styling

@@ -20,4 +20,3 @@ export const CSS_BORDER_BOTTOM = 'border-bottom';
 export const CSS_OUTLINE = 'outline';
 export const CSS_OUTLINE_OFFSET = 'outline-offset';
 export const CSS_COLOR = 'color';
-

@@ -14,3 +14,4 @@ logic game
 * transpile to es6 only, no need for es5 I think
 * winning logic
 * sharing!
+* disable reset on solved problem

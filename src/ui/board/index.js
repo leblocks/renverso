@@ -1,4 +1,5 @@
 import {
+    setTimeout,
     getClassList,
     getAttribute,
     setAttribute,
@@ -37,6 +38,7 @@ import {
     COLUMN_INDEX_ATTRIBUTE,
     BOARD_PADDING,
     CELL_TO_MARGIN_RATIO,
+    WINNER_MENU_DELAY_MS,
 } from '../../consts.js';
 
 const setCellDimensions = (cell, { width, height, margin }) => {
@@ -68,8 +70,7 @@ const onCellClick = ({ target }) => {
     // activate winning logic
     if (isBoardSolved(getState().board)) {
         // TODO some animation here?
-        // TODO goto winning menu
-        goto(LOCATION_WINNER_MENU);
+        setTimeout(() => goto(LOCATION_WINNER_MENU), WINNER_MENU_DELAY_MS);
     }
 };
 
@@ -112,8 +113,11 @@ export const initBoard = () => {
             // set initial color
             setCellStyles(cell, st.board[r][c], st.theme);
             // observer color theme changes
-            addStateObserver(['board'], (state) => setCellStyles(cell, state.board[r][c], state.theme),
-                'cell-board-observer');
+            addStateObserver(
+                ['board'],
+                (state) => setCellStyles(cell, state.board[r][c], state.theme),
+                'cell-board-observer',
+            );
 
             row.appendChild(cell);
         }

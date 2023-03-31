@@ -8,7 +8,7 @@
  */
 export const flipCells = (row, column, pattern, board) => {
     // deep copy
-    const flippedBoard = board.map(r => r.map(c => c));
+    const flippedBoard = board.map((r) => r.map((c) => c));
     pattern(row, column)
         .forEach(([r, c]) => {
             flippedBoard[r][c] = !board[r][c];
@@ -29,12 +29,10 @@ export const flipCells = (row, column, pattern, board) => {
  * @param {Object} state Current game state.
  * @returns {MoveResult} Updated game state as result from making a move.
  */
-export const makeMove = (row, col, { board, pattern, moves }) => {
-    return {
-        board: flipCells(row, col, pattern, board),
-        moves: [...moves, [row, col]],
-    };
-};
+export const makeMove = (row, col, { board, pattern, moves }) => ({
+    board: flipCells(row, col, pattern, board),
+    moves: [...moves, [row, col]],
+});
 
 /**
  * Undoes player last move if there was any.
@@ -63,7 +61,7 @@ export const undoMove = ({ board, pattern, moves }) => {
  */
 export const resetBoard = ({ board, pattern, moves }) => {
     let newMoves = [...moves];
-    let newBoard = board.map(row => row.map(cell => cell));
+    let newBoard = board.map((row) => row.map((cell) => cell));
 
     while (newMoves.length > 0) {
         const updated = undoMove({ board: newBoard, pattern, moves: newMoves });
@@ -78,6 +76,4 @@ export const resetBoard = ({ board, pattern, moves }) => {
  * @param {bool[][]} board Array of booleans representing current board state.
  * @returns {boolean} true if board is sovled.
  */
-export const isBoardSolved = (board) => {
-    return board.every(row => row.every(cell => cell));
-};
+export const isBoardSolved = (board) => board.every((row) => row.every((cell) => cell));

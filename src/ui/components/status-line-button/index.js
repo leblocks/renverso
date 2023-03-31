@@ -1,7 +1,7 @@
 import {
     createElement,
     getClassList,
-} from "../../../web-api/index.js";
+} from '../../../web-api/index.js';
 
 import {
     applyStyles,
@@ -17,6 +17,6 @@ export default function statusLineButton(title, onclick) {
     getClassList(el).add('status-line-button');
     el.innerHTML = title;
     el.onclick = onclick;
-    applyStyles(el, getStylesFor(ELEMENT_STATUS_LINE_BUTTON, getState().theme))
+    applyStyles(el, getStylesFor(ELEMENT_STATUS_LINE_BUTTON, getState().theme));
     return el;
 }
