@@ -1,10 +1,3 @@
 # renverso
-logic game
+This is a simple logic game, with basic support for lazy-eye coloring
 
-## notes
-* lots of code was taken from my other project lazy-eye-blocks TODO
-
-## TODOs
-* write this readme
-* scan for TODOs during production build
-* sharing!
