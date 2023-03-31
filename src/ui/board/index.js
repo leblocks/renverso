@@ -69,7 +69,6 @@ const onCellClick = ({ target }) => {
     // if board is solved after players move
     // activate winning logic
     if (isBoardSolved(getState().board)) {
-        // TODO some animation here?
         setTimeout(() => goto(LOCATION_WINNER_MENU), WINNER_MENU_DELAY_MS);
     }
 };

@@ -25,15 +25,13 @@ import {
  * @property {number} stepsToSolve Number of moves to solve a level.
  * @property {PatternCallback} pattern Pattern used for level generation.
  */
-
 const createLevelDifficulty = (rows, columns, stepsToSolve, pattern) => ({
     rows, columns, stepsToSolve, pattern,
 });
 
 export const LEVEL_EASY = createLevelDifficulty(4, 4, 5, wholeCrossPatternProvider(4, 4));
 export const LEVEL_MEDIUM = createLevelDifficulty(5, 5, 10, wholeCrossPatternProvider(5, 5));
-// TODO revert back after dev
-export const LEVEL_HARD = createLevelDifficulty(7, 7, 1, getRandomPatternProvider(7, 7));
+export const LEVEL_HARD = createLevelDifficulty(7, 7, 20, getRandomPatternProvider(7, 7));
 
 /**
  * Creates array with random coordinates on a board.

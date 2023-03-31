@@ -1,4 +1,3 @@
-// TODO this code is copied from other project, check if some methods still relevant
 import { LOCATION_MAIN_MENU } from './consts.js';
 
 import { THEME_LIGHT } from '../theme/consts.js';
