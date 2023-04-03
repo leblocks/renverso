@@ -1,7 +1,4 @@
-import {
-    wholeCrossPatternProvider,
-    getRandomPatternProvider,
-} from '../pattern/index.js';
+import { WHOLE_CROSS_PATTERN, } from '../pattern/const.js';
 
 import { flipCells } from '../logic/index.js';
 
@@ -29,9 +26,9 @@ const createLevelDifficulty = (rows, columns, stepsToSolve, pattern) => ({
     rows, columns, stepsToSolve, pattern,
 });
 
-export const LEVEL_EASY = createLevelDifficulty(4, 4, 5, wholeCrossPatternProvider(4, 4));
-export const LEVEL_MEDIUM = createLevelDifficulty(5, 5, 10, wholeCrossPatternProvider(5, 5));
-export const LEVEL_HARD = createLevelDifficulty(7, 7, 20, getRandomPatternProvider(7, 7));
+export const LEVEL_EASY = createLevelDifficulty(4, 4, 5, WHOLE_CROSS_PATTERN);
+export const LEVEL_MEDIUM = createLevelDifficulty(5, 5, 10, WHOLE_CROSS_PATTERN);
+export const LEVEL_HARD = createLevelDifficulty(7, 7, 20, WHOLE_CROSS_PATTERN);
 
 /**
  * Creates array with random coordinates on a board.
@@ -47,7 +44,7 @@ export const getRandomCoordinates = (count, rows, columns) => {
 /**
  * Creates random level which requires at least 'stepsToSolve' to be solved.
  * @param {LevelDifficulty} level Required level difficulty.
- * @param {PatternCallback} pattern - The way of flipping.
+ * @param {string} patternName - Name of the flipping pattern.
  * @returns {Level} New game level.
  */
 export const getLevel = ({

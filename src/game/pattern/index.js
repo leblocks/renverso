@@ -1,3 +1,10 @@
+import {
+    WHOLE_CROSS_PATTERN,
+    SMALL_CROSS_PATTERN,
+    INVERTED_CROSS_PATTERN,
+    RANDOM_PATTERN,
+} from './const.js';
+
 /**
  * Provides flipping pattern.
  * @callback PatternCallback
@@ -61,18 +68,20 @@ export const invertedCrossPatternProvider = (rows, columns) => (row, col) => {
         .map((coord) => [coord[0] + row, coord[1] + col]);
 };
 
+const patterns = {
+    [WHOLE_CROSS_PATTERN]: wholeCrossPatternProvider,
+    [SMALL_CROSS_PATTERN]: smallCrossPatternProvider,
+    [INVERTED_CROSS_PATTERN]: invertedCrossPatternProvider,
+    [RANDOM_PATTERN]: (rows, columns) => {
+        const names = Object.keys(patterns).filter((k) => k !== RANDOM_PATTERN);
+        const randomPatternName = names[Math.floor((Math.random() * names.length))];
+        return patterns[randomPatternName](rows, columns);
+    },
+};
+
 /**
- * Provides random pattern, from existing ones.
- * @param {number} rows Number of rows in game board.
- * @param {number} columns Number of columns in game board.
+ * Provides pattern, from existing ones.
+ * @param {string} name Pattern name.
  * @returns {PatternCallback} Small cross pattern method.
  */
-export const getRandomPatternProvider = (rows, columns) => {
-    const patterns = [
-        smallCrossPatternProvider,
-        wholeCrossPatternProvider,
-        invertedCrossPatternProvider,
-    ];
-    // get random pattern
-    return patterns[Math.floor((Math.random() * patterns.length))](rows, columns);
-};
+export const getPatternByName = (name) => patterns[name];

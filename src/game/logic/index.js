@@ -1,12 +1,15 @@
+import { getPatternByName } from '../pattern';
+
 /**
  * Flips cells on a board accroding to provided row, col and pattern.
  * @param {number} row Row number on a board.
  * @param {number} column Column number on a board.
- * @param {PatternCallback} pattern - The way of flipping.
+ * @param {string} patternName - Name of the pattern.
  * @param {bool[][]} board Array of booleans representing current board state.
  * @return {bool[][]} A new board with flipped cells.
  */
-export const flipCells = (row, column, pattern, board) => {
+export const flipCells = (row, column, patternName, board) => {
+    const pattern = getPatternByName(patternName)(board.length, board[0].length);
     // deep copy
     const flippedBoard = board.map((r) => r.map((c) => c));
     pattern(row, column)
