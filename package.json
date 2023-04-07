@@ -8,7 +8,13 @@
         "clean:docs": "rimraf docs",
         "start": "npm run clean:dist && parcel --no-cache",
         "test": "eslint test/** && mocha --recursive",
-        "build": "npm run test && npm run clean:docs && eslint src/**/*.js && parcel build --no-source-maps --dist-dir docs"
+        "build": "npm run test && npm run clean:docs && eslint src/**/*.js && parcel build --no-source-maps"
+    },
+    "targets": {
+        "default": {
+            "distDir": "./docs",
+            "publicUrl": "renverso"
+        }
     },
     "devDependencies": {
         "@parcel/transformer-pug": "^2.8.3",
