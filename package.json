@@ -12,7 +12,8 @@
     },
     "targets": {
         "default": {
-            "distDir": "./docs"
+            "distDir": "./docs",
+            "publicUrl": "renverso"
         }
     },
     "devDependencies": {
