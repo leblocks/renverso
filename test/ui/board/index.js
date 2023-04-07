@@ -17,7 +17,8 @@ import {
 import { router, initBoard } from '../../../src/ui/index.js';
 import { getState, setState } from '../../../src/state/index.js';
 import { querySelector } from '../../../src/web-api/index.js';
-import { wholeCrossPatternProvider } from '../../../src/game/index.js';
+
+import { WHOLE_CROSS_PATTERN } from '../../../src/game/pattern/const.js';
 
 describe('board tests', () => {
     // setup jsdom
@@ -37,7 +38,7 @@ describe('board tests', () => {
                 [false, false, false, false],
                 [false, false, false, false],
             ],
-            pattern: wholeCrossPatternProvider(4, 4),
+            pattern: WHOLE_CROSS_PATTERN,
         });
 
         router('GAME_STATE', { GAME_STATE: () => initBoard() });

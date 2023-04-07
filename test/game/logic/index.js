@@ -11,8 +11,9 @@ import {
     getLevel,
     resetBoard,
     isBoardSolved,
-    smallCrossPatternProvider,
 } from '../../../src/game/index.js';
+
+import { SMALL_CROSS_PATTERN } from '../../../src/game/pattern/const.js';
 
 describe('game logic tests', () => {
     it('makeMove adds correct coords to the state', () => {
@@ -27,7 +28,7 @@ describe('game logic tests', () => {
         const moveResult = makeMove(
             1,
             1,
-            { board, moves, pattern: smallCrossPatternProvider(3, 3) },
+            { board, moves, pattern: SMALL_CROSS_PATTERN },
         );
 
         expect(moveResult.moves).to.be.an('array').and.to.deep.eq([[1, 2], [1, 1]]);
@@ -47,7 +48,7 @@ describe('game logic tests', () => {
 
         const moves = [];
 
-        const moveResult = undoMove({ board, moves, pattern: smallCrossPatternProvider(3, 3) });
+        const moveResult = undoMove({ board, moves, pattern: SMALL_CROSS_PATTERN });
 
         expect(moveResult.moves).to.be.an('array').and.to.deep.eq([]);
         expect(moveResult.board).to.deep.eq([
@@ -66,7 +67,7 @@ describe('game logic tests', () => {
 
         const moves = [[1, 1]];
 
-        const moveResult = undoMove({ board, moves, pattern: smallCrossPatternProvider(3, 3) });
+        const moveResult = undoMove({ board, moves, pattern: SMALL_CROSS_PATTERN });
 
         expect(moveResult.moves).to.be.an('array').and.to.deep.eq([]);
         expect(moveResult.board).to.deep.eq([
@@ -85,7 +86,7 @@ describe('game logic tests', () => {
 
         const moves = [];
 
-        const reset = resetBoard({ board, moves, pattern: smallCrossPatternProvider(3, 3) });
+        const reset = resetBoard({ board, moves, pattern: SMALL_CROSS_PATTERN });
         expect(reset.moves).to.be.an('array').and.to.deep.eq([]);
         expect(reset.board).to.deep.eq([
             [false, true, false],
@@ -99,7 +100,7 @@ describe('game logic tests', () => {
             rows: 3,
             columns: 3,
             stepsToSolve: 10,
-            pattern: smallCrossPatternProvider(3, 3),
+            pattern: SMALL_CROSS_PATTERN,
         });
 
         const reset = resetBoard({ board, moves: solution, pattern });

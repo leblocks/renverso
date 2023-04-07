@@ -9,11 +9,12 @@ import {
     getLevel,
     flipCells,
     getRandomCoordinates,
-    wholeCrossPatternProvider,
     LEVEL_EASY,
     LEVEL_MEDIUM,
     LEVEL_HARD,
 } from '../../../src/game/index.js';
+
+import { WHOLE_CROSS_PATTERN } from '../../../src/game/pattern/const.js';
 
 describe('level tests', () => {
     it('getRandomCoordinates 10000 coordinates', () => {
@@ -33,7 +34,7 @@ describe('level tests', () => {
             rows,
             columns,
             stepsToSolve: 10,
-            pattern: wholeCrossPatternProvider(rows, columns),
+            pattern: WHOLE_CROSS_PATTERN,
         });
 
         const { pattern, solution } = level;

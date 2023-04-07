@@ -1,4 +1,4 @@
-import { WHOLE_CROSS_PATTERN, } from '../pattern/const.js';
+import { WHOLE_CROSS_PATTERN } from '../pattern/const.js';
 
 import { flipCells } from '../logic/index.js';
 

@@ -1,4 +1,4 @@
-import { getPatternByName } from '../pattern';
+import { getPatternByName } from '../pattern/index.js';
 
 /**
  * Flips cells on a board accroding to provided row, col and pattern.

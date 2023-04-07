@@ -71,13 +71,15 @@ export const setTimeout = (callback, delay) => window.setTimeout(callback, delay
 /**
  * Wrapper for https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem.
  * @param {string} key A string containing the name of the key you want to create/update.
- * @param {string} value A string containing the value you want to give the key you are creating/updating.
+ * @param {string} value A string containing the value you want to give the key
+ * you are creating/updating.
  */
 export const saveToStorage = (key, value) => window.localStorage.setItem(key, value);
 
 /**
  * Wrapper for https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem.
  * @param {string} key A string containing the name of the key you want to retrieve the value of..
- * @returns {string} A string containing the value of the key. If the key does not exist, null is returned.
+ * @returns {string} A string containing the value of the key.
+ * If the key does not exist, null is returned.
  */
 export const loadFromStorage = (key) => window.localStorage.getItem(key);

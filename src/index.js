@@ -46,7 +46,6 @@ window.onload = () => {
     });
 
     const savedState = loadFromStorage(LOCAL_STORAGE_KEY);
-    console.log(savedState);
     if (savedState !== null) {
         // reload state
         setState({ ...JSON.parse(savedState) });

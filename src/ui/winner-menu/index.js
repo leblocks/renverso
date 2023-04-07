@@ -1,5 +1,3 @@
-import { goto } from '../../utils/index.js';
-
 import {
     setState,
     getState,
@@ -31,7 +29,6 @@ export default function winnerMenu() {
     const { moves } = getState();
     return menu([
         menuTitle(`Puzzle solved in ${moves.length} ${conjugateMoves(moves)}!`),
-        menuItem('Share puzzle!', () => goto(LOCATION_MAIN_MENU)),
-        menuItem('Back to main menu', gotoMainMenu),
+        menuItem('To main menu', gotoMainMenu),
     ]);
 }
