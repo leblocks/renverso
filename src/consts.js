@@ -10,4 +10,4 @@ export const STATUS_LINE_BUTTON_OUTLINE = '2px';
 export const WINNER_MENU_DELAY_MS = 500;
 export const SOLUTION_MOVE_DELAY = 1500;
 
-export const LOCAL_STORAGE_KEY = '82a14105-d791-49b1-a07a-6500b49e2cdb';
+export const LOCAL_STORAGE_KEY = '7357f676-a003-4524-a931-1316d9efb156';

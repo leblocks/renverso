@@ -9,6 +9,8 @@ const defaultState = {
     solution: [],
     pattern: null,
     theme: THEME_LIGHT,
+    leftEyeColor: 'red',
+    rightEyeColor: 'blue',
 };
 
 // state instance

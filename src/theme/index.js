@@ -1,5 +1,7 @@
 import { setCSSProperty } from '../web-api/index.js';
 
+import { getState } from '../state/index.js';
+
 import {
     CELL_OUTLINE,
     STATUS_LINE_BUTTON_OUTLINE,
@@ -22,6 +24,9 @@ import {
     CSS_COLOR,
     CSS_BORDER_BOTTOM,
 } from './consts.js';
+
+const getLeftEyeColor = () => getState().leftEyeColor;
+const getRightEyeColor = () => getState().rightEyeColor;
 
 // exported for tests to validate its structure
 export const themes = {
@@ -91,26 +96,26 @@ export const themes = {
             [CSS_BACKGROUND_COLOR, 'black'],
         ],
         [ELEMENT_MENU_TITLE]: [
-            [CSS_COLOR, 'red'],
-            [CSS_BORDER_BOTTOM, '1vh solid blue'],
+            [CSS_COLOR, getLeftEyeColor],
+            [CSS_BORDER_BOTTOM, () => `1vh solid ${getRightEyeColor()}`],
         ],
         [ELEMENT_MENU_ITEM]: [
-            [CSS_COLOR, 'red'],
-            [CSS_OUTLINE, `${STATUS_LINE_BUTTON_OUTLINE} solid blue`],
+            [CSS_COLOR, getLeftEyeColor],
+            [CSS_OUTLINE, () => `${STATUS_LINE_BUTTON_OUTLINE} solid ${getRightEyeColor()}`],
             [CSS_OUTLINE_OFFSET, `-${STATUS_LINE_BUTTON_OUTLINE}`],
         ],
         [ELEMENT_CELL]: [
-            [CSS_BACKGROUND_COLOR, 'red'],
+            [CSS_BACKGROUND_COLOR, getLeftEyeColor],
         ],
         [ELEMENT_FLIPPED_CELL]: [
-            [CSS_BACKGROUND_COLOR, 'blue'],
+            [CSS_BACKGROUND_COLOR, getRightEyeColor],
         ],
         [ELEMENT_BOARD]: [
             [CSS_BACKGROUND_COLOR, 'black'],
         ],
         [ELEMENT_STATUS_LINE_BUTTON]: [
-            [CSS_COLOR, 'blue'],
-            [CSS_OUTLINE, `${STATUS_LINE_BUTTON_OUTLINE} solid red`],
+            [CSS_COLOR, getLeftEyeColor],
+            [CSS_OUTLINE, () => `${STATUS_LINE_BUTTON_OUTLINE} solid ${getRightEyeColor()}`],
             [CSS_OUTLINE_OFFSET, `-${STATUS_LINE_BUTTON_OUTLINE}`],
         ],
     },
@@ -158,6 +163,8 @@ export const applyStyles = (element, styles) => {
         });
 
     styles.forEach(([property, value]) => {
-        setCSSProperty(element, property, value);
+        // if value is a method, extract actual value
+        const actualValue = typeof value === 'function' ? value() : value;
+        setCSSProperty(element, property, actualValue);
     });
 };

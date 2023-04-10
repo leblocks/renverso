@@ -7,6 +7,9 @@ import {
     resizeBoard,
     levelSelectionMenu,
     themeSelectionMenu,
+    lazyEyeSettingsMenu,
+    leftEyeSettingsMenu,
+    rightEyeSettingsMenu,
 } from './ui';
 
 import {
@@ -27,6 +30,9 @@ import {
     LOCATION_WINNER_MENU,
     LOCATION_COLOR_SETTINGS,
     LOCATION_LEVEL_SELECTION_MENU,
+    LOCATION_LAZY_EYE_SETTINGS_MENU,
+    LOCATION_LEFT_EYE_SETTINGS_MENU,
+    LOCATION_RIGHT_EYE_SETTINGS_MENU,
 } from './state/consts.js';
 
 import { LOCAL_STORAGE_KEY } from './consts.js';
@@ -37,17 +43,19 @@ window.onresize = () => {
 
 window.onload = () => {
     router(LOCATION_MAIN_MENU, {
-        [LOCATION_MAIN_MENU]: mainMenu(),
-        [LOCATION_LEVEL_SELECTION_MENU]: levelSelectionMenu(),
-        [LOCATION_COLOR_SETTINGS]: themeSelectionMenu(),
         [LOCATION_GAME]: () => puzzle(),
+        [LOCATION_MAIN_MENU]: mainMenu(),
         [LOCATION_RESET_MENU]: resetMenu(),
         [LOCATION_WINNER_MENU]: () => winnerMenu(),
+        [LOCATION_COLOR_SETTINGS]: themeSelectionMenu(),
+        [LOCATION_LEVEL_SELECTION_MENU]: levelSelectionMenu(),
+        [LOCATION_LAZY_EYE_SETTINGS_MENU]: lazyEyeSettingsMenu(),
+        [LOCATION_LEFT_EYE_SETTINGS_MENU]: leftEyeSettingsMenu(),
+        [LOCATION_RIGHT_EYE_SETTINGS_MENU]: rightEyeSettingsMenu(),
     });
 
     const savedState = loadFromStorage(LOCAL_STORAGE_KEY);
     if (savedState !== null) {
-        // reload state
         setState({ ...JSON.parse(savedState) });
     } else {
         // workaround (kludge) to enfore styling
