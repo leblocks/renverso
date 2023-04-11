@@ -12,7 +12,7 @@ import {
  * @property {bool[][]} board Board representing current level.
  * @property {number[][]} solution Array of coordinates with solution for current
  * board with current pattern.
- * @property {PatternCallback} pattern Flipping pattern for current board.
+ * @property {string} pattern Name of the pattern.
  */
 
 /**
@@ -26,7 +26,7 @@ const createLevelDifficulty = (rows, columns, stepsToSolve, pattern) => ({
     rows, columns, stepsToSolve, pattern,
 });
 
-export const LEVEL_EASY = createLevelDifficulty(4, 4, 5, WHOLE_CROSS_PATTERN);
+export const LEVEL_EASY = createLevelDifficulty(4, 4, 0, WHOLE_CROSS_PATTERN);
 export const LEVEL_MEDIUM = createLevelDifficulty(5, 5, 10, WHOLE_CROSS_PATTERN);
 export const LEVEL_HARD = createLevelDifficulty(7, 7, 20, WHOLE_CROSS_PATTERN);
 
@@ -75,3 +75,80 @@ export const initLevel = (difficulty) => {
     // so we don't want to trigger them before it will be cleaned. Not a cool maneuver
     setStateSilently({ board });
 };
+
+let id = 0;
+const getLevelId = () => {
+    id += 1;
+    return id;
+};
+
+// pre-defined levels
+const levels = [
+    {
+        id: getLevelId(),
+        board: [
+            [false, true, true, true],
+            [false, true, true, true],
+            [false, true, true, true],
+            [false, false, false, false],
+        ],
+        solution: [[3, 0]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+    {
+        id: getLevelId(),
+        board: [
+            [false, true, true, false],
+            [true, true, true, true],
+            [true, true, true, true],
+            [false, true, true, false],
+        ],
+        solution: [[3, 0], [0, 0], [0, 3], [3, 3]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+    {
+        id: getLevelId(),
+        board: [
+            [true, true, true, true],
+            [true, false, false, true],
+            [true, false, false, true],
+            [true, true, true, true],
+        ],
+        solution: [[1, 1], [1, 2], [2, 2], [2, 1]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+    {
+        id: getLevelId(),
+        board: [
+            [true, false, true, true],
+            [false, true, true, true],
+            [true, true, true, false],
+            [true, true, false, true],
+        ],
+        solution: [[1, 0], [2, 3], [3, 2], [0, 1]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+    {
+        id: getLevelId(),
+        board: [
+            [true, true, true, false],
+            [true, true, false, true],
+            [true, false, true, true],
+            [false, true, true, true],
+        ],
+        solution: [[3, 0], [2, 1], [1, 2], [0, 3]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+];
+
+/**
+ * @typedef {Object} PredefinedLevelType
+ * @property {number} id Level id.
+ * @typedef {PredefinedLevelType & Level} PredefinedLevel
+ */
+
+/**
+ * Returns all predefined levels.
+ * @returns {PredefinedLevel[]} Array with all predefined levels.
+ */
+export const getPredefinedLevels = () => levels;

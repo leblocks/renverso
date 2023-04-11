@@ -9,6 +9,7 @@ import {
     getLevel,
     flipCells,
     getRandomCoordinates,
+    getPredefinedLevels,
     LEVEL_EASY,
     LEVEL_MEDIUM,
     LEVEL_HARD,
@@ -47,6 +48,22 @@ describe('level tests', () => {
 
         const isSolved = board.every((row) => row.every((cell) => cell));
         assert.isTrue(isSolved);
+    });
+
+    it('all predefined levels are solvable', () => {
+        const levels = getPredefinedLevels();
+        for (let i = 0; i < levels.length; i += 1) {
+            const { pattern, solution } = levels[i];
+            let { board } = levels[i];
+
+            for (let j = solution.length - 1; j >= 0; j -= 1) {
+                const [row, column] = solution[j];
+                board = flipCells(row, column, pattern, board);
+            }
+
+            const isSolved = board.every((row) => row.every((cell) => cell));
+            assert.isTrue(isSolved, `Level with id ${levels[i].id} is not solvable`);
+        }
     });
 
     it('various level difficulties are solvable', () => {
