@@ -10,4 +10,5 @@ export const STATUS_LINE_BUTTON_OUTLINE = '2px';
 export const WINNER_MENU_DELAY_MS = 500;
 export const SOLUTION_MOVE_DELAY = 1500;
 
-export const LOCAL_STORAGE_KEY = '7357f676-a003-4524-a931-1316d9efb156';
+export const LOCAL_STORAGE_KEY = 'fff02259-20e4-4f4b-9a97-71f7c88f5d79';
+export const COLOR_PICKER_PALLETE_SIZE = 20;

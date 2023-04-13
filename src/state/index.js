@@ -3,6 +3,8 @@ import { LOCATION_MAIN_MENU } from './consts.js';
 import { THEME_LIGHT } from '../theme/consts.js';
 
 const defaultState = {
+    currentLevelId: 0,
+    finishedLevelIds: [],
     location: LOCATION_MAIN_MENU,
     board: [],
     moves: [],

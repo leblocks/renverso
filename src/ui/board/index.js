@@ -14,6 +14,7 @@ import {
     setState,
     addStateObserver,
     removeStateObserver,
+    setStateSilently,
 } from '../../state/index.js';
 
 import { LOCATION_WINNER_MENU } from '../../state/consts.js';
@@ -69,6 +70,10 @@ const onCellClick = ({ target }) => {
     // if board is solved after players move
     // activate winning logic
     if (isBoardSolved(getState().board)) {
+        const { finishedLevelIds, currentLevelId } = state;
+        if (!finishedLevelIds.includes(currentLevelId)) {
+            setStateSilently({ finishedLevelIds: [...finishedLevelIds, state.currentLevelId ] });
+        }
         setTimeout(() => goto(LOCATION_WINNER_MENU), WINNER_MENU_DELAY_MS);
     }
 };

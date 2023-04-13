@@ -7,6 +7,8 @@ export { default as winnerMenu } from './winner-menu/index.js';
 export { default as initStatusLine } from './status-line/index.js';
 export { default as continueButton } from './continue-button/index.js';
 export { default as levelSelectionMenu } from './level-selection-menu/index.js';
+export { default as randomLevelSelectionMenu } from './random-level-selection-menu/index.js';
+export { default as predefinedLevelSelectionMenu } from './predefined-level-selection-menu/index.js';
 export { default as lazyEyeSettingsMenu } from './lazy-eye-settings-menu/index.js';
 export { default as leftEyeSettingsMenu } from './left-eye-settings-menu/index.js';
 export { default as rightEyeSettingsMenu } from './right-eye-settings-menu/index.js';

@@ -4,8 +4,10 @@ import {
     addEventListener,
 } from '../../../web-api/index.js';
 
+import { COLOR_PICKER_PALLETE_SIZE } from '../../../consts.js';
+
 // number of red\blue color shades that will be drawn
-const PALETTE_SIZE = 24;
+const COLOR_PICKER_PALLETE_SIZE = 24;
 
 /**
  * Returns rgb color string representation of the color in the palette. E.g: 'rgb(255,0,0)'.
@@ -14,16 +16,16 @@ const PALETTE_SIZE = 24;
  */
 export const getColorForPaletteNumber = (i) => {
     // color changes from rgb(255,0,0) bright red to rgb(0,0,255) bright blue
-    // with step defined by the PALETTE_SIZE
-    const colorChangeStep = 255 / (PALETTE_SIZE / 2);
-    if (i < (PALETTE_SIZE / 2)) {
+    // with step defined by the COLOR_PICKER_PALLETE_SIZE
+    const colorChangeStep = 255 / (COLOR_PICKER_PALLETE_SIZE / 2);
+    if (i < (COLOR_PICKER_PALLETE_SIZE / 2)) {
         // red part
         // first half of the palette we have shades of red from brightest to darkest
         return `rgb(${255 - i * colorChangeStep},0,0)`;
     }
     // blue part
     // second half of the palette we have shades of blue from darkest to brightest
-    return `rgb(0,0,${(i - (PALETTE_SIZE / 2)) * colorChangeStep})`;
+    return `rgb(0,0,${(i - (COLOR_PICKER_PALLETE_SIZE / 2)) * colorChangeStep})`;
 };
 
 /**
@@ -33,7 +35,7 @@ export const getColorForPaletteNumber = (i) => {
  * This method is exproted for tesing purposes.
  */
 export const getColorAtPoint = (x, width) => {
-    const lineWidth = width / (PALETTE_SIZE + 1);
+    const lineWidth = width / (COLOR_PICKER_PALLETE_SIZE + 1);
     let i = 1;
     while (x > lineWidth * i) {
         i += 1;
@@ -51,8 +53,8 @@ export default function colorPicker(colorSetCallback) {
     const ctx = canvas.getContext('2d');
 
     // draw color palette on the canvas
-    const lineWidth = canvas.width / (PALETTE_SIZE + 1);
-    for (let i = 0; i <= PALETTE_SIZE; i += 1) {
+    const lineWidth = canvas.width / (COLOR_PICKER_PALLETE_SIZE + 1);
+    for (let i = 0; i <= COLOR_PICKER_PALLETE_SIZE; i += 1) {
         ctx.fillStyle = getColorForPaletteNumber(i);
         ctx.fillRect(i * lineWidth, 0, lineWidth, canvas.height);
     }

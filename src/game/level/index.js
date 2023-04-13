@@ -68,24 +68,19 @@ export const getLevel = ({
  * Initializes game state with level of required difficulty.
  * @param {LevelDifficulty} level Required level difficulty.
  */
-export const initLevel = (difficulty) => {
+export const initRandomLevel = (difficulty) => {
     const { board, solution, pattern } = getLevel({ ...difficulty });
-    setState({ solution, pattern, moves: [] });
+    setState({ solution, pattern, currentLevelId: 0,  moves: [] });
     // there may be listeners from previous board, those are being cleaned in board creation
     // so we don't want to trigger them before it will be cleaned. Not a cool maneuver
     setStateSilently({ board });
 };
 
-let id = 0;
-const getLevelId = () => {
-    id += 1;
-    return id;
-};
 
 // pre-defined levels
 const levels = [
     {
-        id: getLevelId(),
+        id: 10,
         board: [
             [false, true, true, true],
             [false, true, true, true],
@@ -96,7 +91,7 @@ const levels = [
         pattern: WHOLE_CROSS_PATTERN,
     },
     {
-        id: getLevelId(),
+        id: 20,
         board: [
             [false, true, true, false],
             [true, true, true, true],
@@ -107,7 +102,7 @@ const levels = [
         pattern: WHOLE_CROSS_PATTERN,
     },
     {
-        id: getLevelId(),
+        id: 30,
         board: [
             [true, true, true, true],
             [true, false, false, true],
@@ -118,7 +113,7 @@ const levels = [
         pattern: WHOLE_CROSS_PATTERN,
     },
     {
-        id: getLevelId(),
+        id: 40,
         board: [
             [true, false, true, true],
             [false, true, true, true],
@@ -129,7 +124,7 @@ const levels = [
         pattern: WHOLE_CROSS_PATTERN,
     },
     {
-        id: getLevelId(),
+        id: 50,
         board: [
             [true, true, true, false],
             [true, true, false, true],
@@ -152,3 +147,15 @@ const levels = [
  * @returns {PredefinedLevel[]} Array with all predefined levels.
  */
 export const getPredefinedLevels = () => levels;
+
+/**
+ * Initializes game state with provided level.
+ * @param {PredefinedLevel} level Level to initialize.
+ */
+export const initPredefinedLevel = (level) => {
+    const { board, solution, pattern, id } = level;
+    setState({ solution, pattern, currentLevelId: id, moves: [] });
+    // there may be listeners from previous board, those are being cleaned in board creation
+    // so we don't want to trigger them before it will be cleaned. Not a cool maneuver
+    setStateSilently({ board });
+};

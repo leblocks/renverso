@@ -6,10 +6,12 @@ import {
     winnerMenu,
     resizeBoard,
     levelSelectionMenu,
+    randomLevelSelectionMenu,
     themeSelectionMenu,
     lazyEyeSettingsMenu,
     leftEyeSettingsMenu,
     rightEyeSettingsMenu,
+    predefinedLevelSelectionMenu,
 } from './ui';
 
 import {
@@ -30,6 +32,8 @@ import {
     LOCATION_WINNER_MENU,
     LOCATION_COLOR_SETTINGS,
     LOCATION_LEVEL_SELECTION_MENU,
+    LOCATION_RANDOM_LEVEL_SELECTION_MENU,
+    LOCATION_PREDEFINED_LEVEL_SELECTION_MENU,
     LOCATION_LAZY_EYE_SETTINGS_MENU,
     LOCATION_LEFT_EYE_SETTINGS_MENU,
     LOCATION_RIGHT_EYE_SETTINGS_MENU,
@@ -52,6 +56,8 @@ window.onload = () => {
         [LOCATION_LAZY_EYE_SETTINGS_MENU]: lazyEyeSettingsMenu(),
         [LOCATION_LEFT_EYE_SETTINGS_MENU]: leftEyeSettingsMenu(),
         [LOCATION_RIGHT_EYE_SETTINGS_MENU]: rightEyeSettingsMenu(),
+        [LOCATION_RANDOM_LEVEL_SELECTION_MENU]: randomLevelSelectionMenu(),
+        [LOCATION_PREDEFINED_LEVEL_SELECTION_MENU]: () => predefinedLevelSelectionMenu(),
     });
 
     const savedState = loadFromStorage(LOCAL_STORAGE_KEY);
