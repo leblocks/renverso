@@ -27,8 +27,8 @@ export default function levelSelectionMenu() {
     const { finishedLevelIds } = getState();
     const levels = getPredefinedLevels()
         .map((level, i) => {
-            const checkmark = finishedLevelIds.includes(level.id) ? ' #x2713' : '';
-            return menuItem(`Level ${i + 1}${checkmark}`, () => startGame(level));
+            const finished = finishedLevelIds.includes(level.id) ? ' (done)' : '';
+            return menuItem(`Level ${i + 1}${finished}`, () => startGame(level));
         });
 
     return menu([

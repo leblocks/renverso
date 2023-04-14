@@ -74,6 +74,8 @@ const onCellClick = ({ target }) => {
         if (!finishedLevelIds.includes(currentLevelId)) {
             setStateSilently({ finishedLevelIds: [...finishedLevelIds, state.currentLevelId ] });
         }
+        removeStateObserver('board-theme-observer');
+        removeStateObserver('cell-board-observer');
         setTimeout(() => goto(LOCATION_WINNER_MENU), WINNER_MENU_DELAY_MS);
     }
 };
