@@ -72,7 +72,7 @@ const onCellClick = ({ target }) => {
     if (isBoardSolved(getState().board)) {
         const { finishedLevelIds, currentLevelId } = state;
         if (!finishedLevelIds.includes(currentLevelId)) {
-            setStateSilently({ finishedLevelIds: [...finishedLevelIds, state.currentLevelId ] });
+            setStateSilently({ finishedLevelIds: [...finishedLevelIds, state.currentLevelId] });
         }
         removeStateObserver('board-theme-observer');
         removeStateObserver('cell-board-observer');

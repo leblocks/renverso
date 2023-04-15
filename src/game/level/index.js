@@ -7,7 +7,7 @@ import {
 
 import { WHOLE_CROSS_PATTERN } from '../pattern/const.js';
 
-import { levels } from './levels.js'
+import { levels } from './levels.js';
 
 /**
  * @typedef {Object} Level
@@ -72,7 +72,9 @@ export const getLevel = ({
  */
 export const initRandomLevel = (difficulty) => {
     const { board, solution, pattern } = getLevel({ ...difficulty });
-    setState({ solution, pattern, currentLevelId: 0,  moves: [] });
+    setState({
+        solution, pattern, currentLevelId: 0, moves: [],
+    });
     // there may be listeners from previous board, those are being cleaned in board creation
     // so we don't want to trigger them before it will be cleaned. Not a cool maneuver
     setStateSilently({ board });
@@ -99,13 +101,13 @@ export const getPredefinedLevels = () => levels;
  */
 export const getNextUncompleteLevel = (currentLevelId, finishedLevelIds, allLevels) => {
     const uncompleteLevels = allLevels
-        .filter(level => !finishedLevelIds.includes(level.id));
+        .filter((level) => !finishedLevelIds.includes(level.id));
 
     if (uncompleteLevels.length === 0) {
         return null;
     }
 
-    const nextLevel = uncompleteLevels.find(level => level.id > currentLevelId);
+    const nextLevel = uncompleteLevels.find((level) => level.id > currentLevelId);
     if (nextLevel !== undefined) {
         return nextLevel;
     }
@@ -118,8 +120,12 @@ export const getNextUncompleteLevel = (currentLevelId, finishedLevelIds, allLeve
  * @param {PredefinedLevel} level Level to initialize.
  */
 export const initPredefinedLevel = (level) => {
-    const { board, solution, pattern, id } = level;
-    setState({ solution, pattern, currentLevelId: id, moves: [] });
+    const {
+        board, solution, pattern, id,
+    } = level;
+    setState({
+        solution, pattern, currentLevelId: id, moves: [],
+    });
     // there may be listeners from previous board, those are being cleaned in board creation
     // so we don't want to trigger them before it will be cleaned. Not a cool maneuver
     setStateSilently({ board });
