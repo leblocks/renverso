@@ -91,6 +91,29 @@ export const initRandomLevel = (difficulty) => {
 export const getPredefinedLevels = () => levels;
 
 /**
+ * Returns next uncomplete level or null if there aren't any.
+ * @param {number} currentLevelId Id of the current level.
+ * @param {number[]} finishedLevelIds Ids of finished levels.
+ * @param {PredefinedLevel[]} allLevels All existing predefined levels.
+ * @returns {PredefinedLevel} Uncomplete level or 'null' if there aren't any.
+ */
+export const getNextUncompleteLevel = (currentLevelId, finishedLevelIds, allLevels) => {
+    const uncompleteLevels = allLevels
+        .filter(level => !finishedLevelIds.includes(level.id));
+
+    if (uncompleteLevels.length === 0) {
+        return null;
+    }
+
+    const nextLevel = uncompleteLevels.find(level => level.id > currentLevelId);
+    if (nextLevel !== undefined) {
+        return nextLevel;
+    }
+    // first uncomplete level is ok too.
+    return uncompleteLevels[0];
+};
+
+/**
  * Initializes game state with provided level.
  * @param {PredefinedLevel} level Level to initialize.
  */

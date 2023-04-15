@@ -9,6 +9,7 @@ import {
     getLevel,
     flipCells,
     getRandomCoordinates,
+    getNextUncompleteLevel,
     getPredefinedLevels,
     LEVEL_EASY,
     LEVEL_MEDIUM,
@@ -76,9 +77,40 @@ describe('level tests', () => {
                     const [row, column] = solution[i];
                     board = flipCells(row, column, pattern, board);
                 }
-
                 const isSolved = board.every((row) => row.every((cell) => cell));
                 assert.isTrue(isSolved);
             });
+    });
+
+    it('getNextUncompleteLevel all levels completed', () => {
+        const currentLevelId = 1;
+        const dummyLevels = [{ id: 1 }, { id: 2 }, { id: 3 }];
+        const finishedLevelIds = dummyLevels.map((l) => l.id);
+        const nextLevel = getNextUncompleteLevel(currentLevelId, finishedLevelIds, dummyLevels);
+        assert.isNull(nextLevel);
+    });
+
+    it('getNextUncompleteLevel all except one completed', () => {
+        const currentLevelId = 2;
+        const dummyLevels = [{ id: 1 }, { id: 2 }, { id: 3 }];
+        const finishedLevelIds = [1, 2];
+        const nextLevel = getNextUncompleteLevel(currentLevelId, finishedLevelIds, dummyLevels);
+        expect(nextLevel.id).to.be.eq(3);
+    });
+
+    it('getNextUncompleteLevel no completed levels', () => {
+        const currentLevelId = 2;
+        const dummyLevels = [{ id: 1 }, { id: 2 }, { id: 3 }];
+        const finishedLevelIds = [];
+        const nextLevel = getNextUncompleteLevel(currentLevelId, finishedLevelIds, dummyLevels);
+        expect(nextLevel.id).to.be.eq(3);
+    });
+
+    it('getNextUncompleteLevel no next completed levels', () => {
+        const currentLevelId = 2;
+        const dummyLevels = [{ id: 1 }, { id: 2 }, { id: 3 }];
+        const finishedLevelIds = [3];
+        const nextLevel = getNextUncompleteLevel(currentLevelId, finishedLevelIds, dummyLevels);
+        expect(nextLevel.id).to.be.eq(1);
     });
 });
