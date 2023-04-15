@@ -6,9 +6,6 @@ import {
 
 import { COLOR_PICKER_PALLETE_SIZE } from '../../../consts.js';
 
-// number of red\blue color shades that will be drawn
-const COLOR_PICKER_PALLETE_SIZE = 24;
-
 /**
  * Returns rgb color string representation of the color in the palette. E.g: 'rgb(255,0,0)'.
  * @param {number} i Number of the color in the palette.
