@@ -13,3 +13,4 @@ export { default as lazyEyeSettingsMenu } from './lazy-eye-settings-menu/index.j
 export { default as leftEyeSettingsMenu } from './left-eye-settings-menu/index.js';
 export { default as rightEyeSettingsMenu } from './right-eye-settings-menu/index.js';
 export { default as themeSelectionMenu } from './theme-selection-menu/index.js';
+export { default as levelEditorMenu } from './level-editor-menu/index.js';

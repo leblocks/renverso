@@ -3,7 +3,6 @@ import { setState } from '../../state/index.js';
 import {
     colorPicker,
     colorIndicator,
-
     menu,
     menuItem,
     menuTitle,

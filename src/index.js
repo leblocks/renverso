@@ -5,12 +5,13 @@ import {
     resetMenu,
     winnerMenu,
     resizeBoard,
+    levelEditorMenu,
     levelSelectionMenu,
-    randomLevelSelectionMenu,
     themeSelectionMenu,
     lazyEyeSettingsMenu,
     leftEyeSettingsMenu,
     rightEyeSettingsMenu,
+    randomLevelSelectionMenu,
     predefinedLevelSelectionMenu,
 } from './ui';
 
@@ -37,6 +38,7 @@ import {
     LOCATION_LAZY_EYE_SETTINGS_MENU,
     LOCATION_LEFT_EYE_SETTINGS_MENU,
     LOCATION_RIGHT_EYE_SETTINGS_MENU,
+    LOCATION_LEVEL_EDITOR_MENU,
 } from './state/consts.js';
 
 import { LOCAL_STORAGE_KEY } from './consts.js';
@@ -46,7 +48,7 @@ window.onresize = () => {
 };
 
 window.onload = () => {
-    router(LOCATION_MAIN_MENU, {
+    const locationMap = {
         [LOCATION_GAME]: () => puzzle(),
         [LOCATION_MAIN_MENU]: mainMenu(),
         [LOCATION_RESET_MENU]: resetMenu(),
@@ -58,7 +60,13 @@ window.onload = () => {
         [LOCATION_RIGHT_EYE_SETTINGS_MENU]: rightEyeSettingsMenu(),
         [LOCATION_RANDOM_LEVEL_SELECTION_MENU]: randomLevelSelectionMenu(),
         [LOCATION_PREDEFINED_LEVEL_SELECTION_MENU]: () => predefinedLevelSelectionMenu(),
-    });
+    };
+
+    if (process.env.NODE_ENV !== 'production') {
+        locationMap[LOCATION_LEVEL_EDITOR_MENU] = levelEditorMenu();
+    }
+
+    router(LOCATION_MAIN_MENU, locationMap);
 
     const savedState = loadFromStorage(LOCAL_STORAGE_KEY);
     if (savedState !== null) {
