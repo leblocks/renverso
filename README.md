@@ -19,6 +19,3 @@ There are development dependencies only, resulting bundle is a vanilla javascrip
 * _[eslint](https://eslint.org/)_ linter
 * _[mocha](https://mochajs.org/)_ and _[chai](https://www.chaijs.com/)_  testing and assertion frameworks
 
-## Next steps
-* Provide tutorial levels to make the objective of the game more clear. Currently, it is not clear what is expected.
-* Adjust levels of difficulty
