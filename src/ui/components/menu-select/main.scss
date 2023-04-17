@@ -1,2 +1,4 @@
-.ui-menu-select-option {
+.ui-menu-select {
+    @include menu-base-style;
 }
+

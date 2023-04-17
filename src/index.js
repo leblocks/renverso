@@ -5,6 +5,7 @@ import {
     resetMenu,
     winnerMenu,
     resizeBoard,
+    levelEditor,
     levelEditorMenu,
     levelSelectionMenu,
     themeSelectionMenu,
@@ -39,6 +40,7 @@ import {
     LOCATION_LEFT_EYE_SETTINGS_MENU,
     LOCATION_RIGHT_EYE_SETTINGS_MENU,
     LOCATION_LEVEL_EDITOR_MENU,
+    LOCATION_LEVEL_EDITOR,
 } from './state/consts.js';
 
 import { LOCAL_STORAGE_KEY } from './consts.js';
@@ -63,7 +65,8 @@ window.onload = () => {
     };
 
     if (process.env.NODE_ENV !== 'production') {
-        locationMap[LOCATION_LEVEL_EDITOR_MENU] = levelEditorMenu();
+        locationMap[LOCATION_LEVEL_EDITOR_MENU] = () => levelEditorMenu();
+        locationMap[LOCATION_LEVEL_EDITOR] = () => levelEditor();
     }
 
     router(LOCATION_MAIN_MENU, locationMap);

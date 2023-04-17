@@ -30,11 +30,10 @@ export default function menuSelect(options, onSelectChange) {
         const option = createElement('option');
         option.value = value;
         option.text = text;
-        getClassList(option).add('ui-menu-select-option');
         element.appendChild(option);
     }
 
-    getClassList(element).add('ui-menu-item');
+    getClassList(element).add('ui-menu-select');
     // set initial styling on element
     applyStyles(element, getStylesFor(ELEMENT_MENU_ITEM, getState().theme));
     addStateObserver(['theme'], ({ theme }) => {
@@ -42,4 +41,4 @@ export default function menuSelect(options, onSelectChange) {
     }, 'menu-item-theme-observer');
 
     return element;
-};
+}
