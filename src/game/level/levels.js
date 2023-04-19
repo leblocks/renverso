@@ -115,5 +115,67 @@ export const levels = [
         ],
         pattern: WHOLE_CROSS_PATTERN,
     },
+    {
+        id: 110,
+        board: [
+            [true, true, false, true, true],
+            [true, false, false, false, true],
+            [false, false, false, false, false],
+            [true, false, false, false, true],
+            [true, true, false, true, true],
+        ],
+        solution: [[3, 3], [1, 3], [1, 1], [3, 1], [2, 2]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+    {
+        id: 120,
+        board: [
+            [true, false, true, false, true],
+            [false, false, true, false, false],
+            [true, true, true, true, true],
+            [false, false, true, false, false],
+            [true, false, true, false, true],
+        ],
+        solution: [[3, 1], [2, 2], [1, 3], [3, 3], [2, 2], [1, 1], [1, 0], [0, 1],
+            [4, 3], [3, 4], [1, 4], [0, 3], [4, 1], [3, 0]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+    {
+        id: 130,
+        board: [
+            [false, true, true, false, true],
+            [true, true, false, true, false],
+            [true, false, true, false, true],
+            [false, true, false, true, true],
+            [true, false, true, true, false],
+        ],
+        solution: [[0, 0], [0, 1], [1, 0], [4, 3], [4, 4], [3, 4]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+    {
+        id: 140,
+        board: [
+            [true, false, false, false, true],
+            [true, false, false, false, true],
+            [false, true, false, true, false],
+            [false, false, false, false, false],
+            [false, true, false, true, false],
+        ],
+        solution: [[3, 1], [2, 2], [3, 3], [4, 2], [3, 2]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
+    {
+        id: 150,
+        board: [
+            [false, true, false, true, false],
+            [true, false, false, false, true],
+            [false, false, false, false, false],
+            [true, false, false, false, true],
+            [false, true, false, true, false],
+        ],
+        solution: [[4, 4], [3, 3], [1, 3], [0, 4], [3, 1],
+            [4, 0], [1, 1], [0, 0], [2, 2]],
+        pattern: WHOLE_CROSS_PATTERN,
+    },
 
 ];
